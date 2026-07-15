@@ -1,0 +1,2027 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Мужайся! — программа трансформации для мужчин</title>
+<meta name="description" content="Мужайся! — закрытая система трансформации для мужчин от Рамзеса Кубинского, №1 дейтинг-коуча в СНГ. 6 месяцев, 6 модулей: уверенность, знакомства, свидания и внутренний стержень. Бесплатный разбор ситуации — 20 минут, без продажи.">
+<meta property="og:title" content="Мужайся! — программа трансформации для мужчин">
+<meta property="og:description" content="6 месяцев, 6 модулей, закрытая система подготовки. Автор — Рамзес Кубинский. Запишись на бесплатный разбор ситуации.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpolygon points='20,3 36,11.5 36,28.5 20,37 4,28.5 4,11.5' fill='none' stroke='%23ff2438' stroke-width='2'/%3E%3Cpolygon points='20,12 28,16.5 28,23.5 20,28 12,23.5 12,16.5' fill='none' stroke='%23ff2438' stroke-width='1.4' opacity='.7'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&family=Noto+Serif+JP:wght@700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#07070a;
+    --bg-panel:#0c0d10;
+    --bg-panel-2:#111318;
+    --steel:#1b1d22;
+    --line:#26282f;
+    --line-soft:rgba(255,255,255,.07);
+    --white:#f1f2f5;
+    --gray:#8b8e97;
+    --gray-dim:#54565e;
+    --red:#ff2438;
+    --red-2:#c8101f;
+    --red-glow:rgba(255,36,56,.45);
+    --red-glow-soft:rgba(255,36,56,.16);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth; scrollbar-color:#ff2438 #0a0a0c; scrollbar-width:thin; overflow-x:hidden; max-width:100%;}
+  ::-webkit-scrollbar{width:10px;height:10px;}
+  ::-webkit-scrollbar-track{background:#0a0a0c;}
+  ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#ff2438,#8a0f1c);border-radius:0;border:1px solid #050506;}
+  ::-webkit-scrollbar-thumb:hover{background:#ff2438;}
+  body{
+    background:var(--bg);
+    color:var(--white);
+    font-family:'Inter',sans-serif;
+    font-size:19px;
+    line-height:1.65;
+    position:relative;
+    overflow-x:hidden;
+    max-width:100%;
+  }
+  /* ambient noise / grid wash across the whole page */
+  body::before{
+    content:'';
+    position:fixed;inset:0;z-index:0;pointer-events:none;
+    background-image:
+      linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    background-size:42px 42px;
+    mask-image:radial-gradient(ellipse 90% 70% at 50% 0%, black 0%, transparent 75%);
+  }
+  h1,h2,h3{
+    font-family:'Oswald',sans-serif;
+    font-weight:700;
+    letter-spacing:0.01em;
+    text-transform:uppercase;
+  }
+  .mono{
+    font-family:'JetBrains Mono',monospace;
+    font-size:14px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--red);
+  }
+  .wrap{max-width:1240px;margin:0 auto;padding:0 28px;position:relative;z-index:1;overflow:hidden;}
+  a{color:inherit;text-decoration:none;}
+
+  ::selection{background:var(--red);color:#000;}
+
+  /* ---------- hexagon system ---------- */
+  .hex-icon{display:inline-block;position:relative;}
+  .hex-badge{
+    width:34px;height:34px;
+    clip-path:polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0% 50%);
+    background:linear-gradient(160deg,var(--steel),#0a0a0c);
+    border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--red);
+    flex-shrink:0;
+  }
+  .hexgrid-bg{
+    position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.5;
+    background-image:
+      radial-gradient(circle at 18% 20%, rgba(255,36,56,.06), transparent 40%),
+      repeating-linear-gradient(60deg, rgba(255,255,255,.028) 0 1px, transparent 1px 62px),
+      repeating-linear-gradient(-60deg, rgba(255,255,255,.028) 0 1px, transparent 1px 62px),
+      repeating-linear-gradient(0deg, rgba(255,255,255,.028) 0 1px, transparent 1px 62px);
+  }
+
+  @keyframes scan{
+    0%{transform:translateY(-100%);}
+    100%{transform:translateY(100%);}
+  }
+  @keyframes spin-slow{ to{ transform:rotate(360deg); } }
+  @keyframes spin-slow-rev{ to{ transform:rotate(-360deg); } }
+  @keyframes pulse-red{
+    0%,100%{opacity:.35;}
+    50%{opacity:.9;}
+  }
+  @keyframes blink{0%,49%{opacity:1;}50%,100%{opacity:0;}}
+  .cursor{display:inline-block;animation:blink 1s steps(1) infinite;color:var(--red);}
+
+  @keyframes glitch-a{
+    0%,100%{clip-path:inset(0 0 92% 0);transform:translate(0,0);}
+    10%{clip-path:inset(10% 0 60% 0);transform:translate(-2px,0);}
+    20%{clip-path:inset(70% 0 5% 0);transform:translate(2px,0);}
+    30%{clip-path:inset(40% 0 40% 0);transform:translate(-1px,0);}
+    40%{clip-path:inset(0 0 92% 0);transform:translate(0,0);}
+    100%{clip-path:inset(0 0 92% 0);transform:translate(0,0);}
+  }
+  @keyframes glitch-b{
+    0%,100%{clip-path:inset(85% 0 0 0);transform:translate(0,0);}
+    15%{clip-path:inset(20% 0 65% 0);transform:translate(2px,0);}
+    25%{clip-path:inset(55% 0 20% 0);transform:translate(-2px,0);}
+    45%{clip-path:inset(85% 0 0 0);transform:translate(0,0);}
+    100%{clip-path:inset(85% 0 0 0);transform:translate(0,0);}
+  }
+  .glitch-wrap{position:relative;display:inline-block;}
+  .glitch-wrap::before,.glitch-wrap::after{
+    content:attr(data-text);
+    position:absolute;left:0;top:0;width:100%;
+    overflow:hidden;color:var(--red);
+    opacity:.75;pointer-events:none;
+  }
+  .glitch-wrap::before{animation:glitch-a 5.4s infinite steps(1,end);transform:translate(-2px,0);}
+  .glitch-wrap::after{animation:glitch-b 6.2s infinite steps(1,end);color:#fff;opacity:.5;transform:translate(2px,0);}
+
+  @keyframes fade-up{
+    from{opacity:0;transform:translateY(18px);}
+    to{opacity:1;transform:translateY(0);}
+  }
+  .reveal{animation:fade-up .7s cubic-bezier(.2,.7,.3,1) both;}
+
+  /* corner-bracket HUD frame */
+  .hud{
+    position:relative;
+  }
+  .hud::before,.hud::after,.hud .br,.hud .bl{
+    content:'';position:absolute;width:14px;height:14px;
+    border-color:var(--red);pointer-events:none;
+  }
+  .hud::before{top:-1px;left:-1px;border-top:1.5px solid var(--red);border-left:1.5px solid var(--red);}
+  .hud::after{top:-1px;right:-1px;border-top:1.5px solid var(--red);border-right:1.5px solid var(--red);}
+  .hud .bl{bottom:-1px;left:-1px;border-bottom:1.5px solid var(--red);border-left:1.5px solid var(--red);}
+  .hud .br{bottom:-1px;right:-1px;border-bottom:1.5px solid var(--red);border-right:1.5px solid var(--red);}
+
+  /* ---------- nav ---------- */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(7,7,10,.86);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line-soft);
+  }
+  .navbar{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:16px 24px;max-width:1120px;margin:0 auto;
+  }
+  .logo{
+    display:flex;align-items:center;gap:12px;
+    font-family:'Oswald',sans-serif;font-weight:700;font-size:23px;
+    letter-spacing:0.08em;text-transform:uppercase;color:var(--white);
+  }
+  .logo svg{width:32px;height:32px;flex-shrink:0;}
+  .navbar .cta{
+    border:1px solid var(--red);
+    color:var(--red);
+    padding:13px 24px;
+    font-size:14px;
+    font-family:'JetBrains Mono',monospace;
+    text-transform:uppercase;
+    letter-spacing:0.08em;
+    transition:background .15s,color .15s,box-shadow .2s;
+    clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);
+  }
+  .navbar .cta:hover{background:var(--red);color:#050505;box-shadow:0 0 24px var(--red-glow);}
+  .nav-links{display:flex;gap:32px;font-family:'JetBrains Mono',monospace;font-size:13px;text-transform:uppercase;letter-spacing:0.08em;}
+  .nav-links a{color:var(--gray);position:relative;padding-bottom:2px;}
+  .nav-links a:hover{color:var(--white);}
+  .nav-links a::before{content:'/ ';color:var(--red);}
+  .navbar-right{display:flex;align-items:center;gap:16px;}
+  .nav-toggle{
+    display:none;flex-direction:column;justify-content:center;gap:5px;
+    width:38px;height:38px;background:transparent;border:1px solid var(--line);
+    cursor:pointer;flex-shrink:0;padding:0;
+  }
+  .nav-toggle span{width:18px;height:2px;background:var(--red);margin:0 auto;transition:transform .25s ease, opacity .2s ease;}
+  .nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .nav-toggle.open span:nth-child(2){opacity:0;}
+  .nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+  .mobile-nav{
+    display:none;flex-direction:column;gap:2px;
+    background:var(--bg-panel);border-top:1px solid var(--line-soft);
+    padding:10px 24px 20px;
+  }
+  .mobile-nav a{
+    padding:16px 4px;font-family:'JetBrains Mono',monospace;font-size:15px;text-transform:uppercase;
+    letter-spacing:.06em;color:var(--gray);border-bottom:1px solid var(--line-soft);
+  }
+  .mobile-nav a:last-child{border-bottom:none;}
+  .mobile-nav.open{display:flex;}
+  @media(max-width:860px){
+    .nav-links{display:none;}
+    .nav-toggle{display:flex;}
+  }
+  @media(max-width:520px){
+    .navbar-right .cta{display:none;}
+  }
+
+  section{padding:116px 0;position:relative;background:var(--bg);overflow:hidden;}
+  section:last-of-type{border-bottom:none;}
+
+  .eyebrow{margin-bottom:20px;display:flex;align-items:center;gap:10px;}
+  .eyebrow::before{content:'';width:24px;height:1px;background:var(--red);display:inline-block;}
+
+  /* ---------- hero ---------- */
+  .hero{padding-top:52px;padding-bottom:96px;}
+  .hero-frame{
+    border:1px solid var(--line);
+    background:
+      radial-gradient(ellipse 70% 60% at 75% 10%, var(--red-glow-soft), transparent 60%),
+      linear-gradient(180deg,#0b0b0e,#050506);
+    color:var(--white);
+    padding:72px 58px;
+    display:flex;flex-direction:column;
+    min-height:725px;justify-content:center;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero-frame .hexgrid-bg{opacity:.7;}
+  .hero-frame .scanline{
+    position:absolute;left:0;right:0;height:120px;z-index:1;pointer-events:none;
+    background:linear-gradient(180deg, transparent, rgba(255,36,56,.10), transparent);
+    animation:scan 7s linear infinite;
+  }
+  .hero-frame .big-hex{
+    position:absolute;right:-60px;top:50%;transform:translateY(-50%);
+    width:420px;height:420px;opacity:.5;pointer-events:none;
+  }
+  .hero-frame .big-hex svg{width:100%;height:100%;}
+  .hero-frame .spin1{animation:spin-slow 34s linear infinite;transform-origin:center;}
+  .hero-frame .spin2{animation:spin-slow-rev 24s linear infinite;transform-origin:center;}
+  .hero-frame > *{position:relative;z-index:2;}
+  .hero-frame .photo-tag{
+    position:absolute;top:22px;right:26px;
+    font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--gray-dim);
+    z-index:2;letter-spacing:.1em;text-transform:uppercase;
+  }
+  .hero-photo-frame{
+    position:absolute;right:64px;top:50%;transform:translateY(-50%);
+    width:400px;height:850px;z-index:1;
+    background:linear-gradient(180deg,#0d0d10,#050506);
+    border:1px solid var(--line);
+    overflow:hidden;
+    mask-image:radial-gradient(ellipse 62% 68% at 50% 45%, black 40%, transparent 92%);
+    -webkit-mask-image:radial-gradient(ellipse 62% 68% at 50% 45%, black 40%, transparent 92%);
+  }
+  .hero-photo-frame img{
+    width:100%;height:100%;object-fit:cover;display:block;
+    filter:brightness(.85) saturate(.9);
+  }
+  @media(max-width:1140px){.hero-photo-frame{right:24px;width:220px;height:320px;opacity:.5;}}
+  @media(max-width:860px){.hero-photo-frame{display:none;}}
+  .hero-brand{font-family:'JetBrains Mono',monospace;font-size:14px;color:var(--red);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:18px;display:flex;align-items:center;gap:12px;}
+  .hero-brand::before{content:'';width:8px;height:8px;background:var(--red);border-radius:50%;box-shadow:0 0 10px var(--red);animation:pulse-red 2s ease-in-out infinite;}
+  .hero-tagline{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--gray);text-transform:uppercase;letter-spacing:0.14em;margin-bottom:28px;}
+  .hero h1{font-size:74px;line-height:1.05;margin-bottom:30px;max-width:760px;color:var(--white);}
+  .hero p.lead{font-size:19px;max-width:560px;color:var(--gray);margin-top:32px;font-family:'Inter',sans-serif;letter-spacing:0.01em;}
+  .btn-row{display:flex;gap:18px;flex-wrap:wrap;align-items:center;}
+  .btn{
+    display:inline-block;
+    background:var(--red);color:#08080a;
+    padding:20px 40px;
+    font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:600;
+    text-transform:uppercase;letter-spacing:0.08em;
+    border:1px solid var(--red);
+    transition:box-shadow .2s, transform .15s, background .2s;
+    cursor:pointer;
+    clip-path:polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px);
+  }
+  .btn:hover{box-shadow:0 0 30px var(--red-glow);transform:translateY(-1px);}
+  .btn-outline{
+    background:transparent;color:var(--white);border:1px solid var(--line);
+  }
+  .btn-outline:hover{border-color:var(--red);color:var(--red);box-shadow:0 0 20px var(--red-glow-soft);}
+  .hint{font-size:15px;color:var(--gray);font-family:'JetBrains Mono',monospace;letter-spacing:.03em;}
+
+  /* section heading */
+  .sec-head{margin-bottom:56px;max-width:760px;}
+  .sec-head h2{font-size:46px;margin-bottom:16px;position:relative;display:inline-block;}
+  .sec-head h2::before{content:'[';color:var(--red);opacity:.5;margin-right:10px;font-weight:400;}
+  .sec-head h2::after{content:']';color:var(--red);opacity:.5;margin-left:10px;font-weight:400;}
+  .sec-head p{color:var(--gray);font-size:19px;font-family:'Inter';}
+  .tier .tname{position:relative;}
+  .tier .tname::before{content:'[ ';color:var(--red);opacity:.45;}
+  .tier .tname::after{content:' ]';color:var(--red);opacity:.45;}
+
+  /* portraits grid */
+  .grid-cards{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;
+    background:var(--line);border:1px solid var(--line);
+  }
+  .card{
+    background:var(--bg-panel);padding:34px 28px;min-height:200px;
+    display:flex;flex-direction:column;justify-content:space-between;
+    cursor:default;transition:background .25s, box-shadow .25s;
+    position:relative;
+  }
+
+  .card h3{font-size:19px;margin-bottom:12px;text-transform:none;letter-spacing:0;}
+  .card p{font-size:16px;color:var(--gray);font-family:'Inter';}
+  .card .tag{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--red);text-transform:uppercase;letter-spacing:.08em;}
+
+  /* promise / against */
+  .promise-text{font-size:22px;font-family:'Inter',sans-serif;font-weight:500;line-height:1.4;max-width:760px;}
+  .win-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:16px;}
+  .win{background:var(--bg-panel);padding:24px;text-align:center;font-size:16px;font-weight:500;font-family:'Inter';color:var(--white);position:relative;}
+  .cost-compare{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:16px;}
+  .cost-col{background:var(--bg-panel);padding:34px;}
+  .cost-col h4{font-family:'JetBrains Mono',sans-serif;font-size:14px;margin-bottom:20px;text-transform:uppercase;letter-spacing:.1em;color:var(--gray);}
+  .cost-col ul{list-style:none;font-size:17px;color:var(--white);font-family:'Inter';}
+  .cost-col li{padding:12px 0;border-top:1px solid var(--line-soft);}
+  .cost-col li:first-of-type{border-top:none;}
+  .cost-col.negative h4{color:var(--gray-dim);}
+  .cost-col.negative li{color:var(--gray-dim);}
+  .cost-col:not(.negative) h4{color:var(--red);}
+  .cost-col:not(.negative) li::before{content:'▸ ';color:var(--red);}
+
+  /* author */
+  .author-grid{display:grid;grid-template-columns:1fr 1.2fr;gap:60px;align-items:stretch;}
+  .photo-frame{
+    border:1px solid var(--line);height:100%;min-height:520px;
+    position:relative;
+    background:linear-gradient(180deg,#0b0b0e,#050506);
+    overflow:hidden;
+  }
+  .photo-frame img{
+    width:100%;height:100%;object-fit:cover;display:block;
+    filter:brightness(.9) saturate(.95);
+    mask-image:radial-gradient(ellipse 62% 68% at 50% 45%, black 40%, transparent 92%);
+    -webkit-mask-image:radial-gradient(ellipse 62% 68% at 50% 45%, black 40%, transparent 92%);
+  }
+  .photo-frame .hexgrid-bg{opacity:.6;}
+  .photo-frame .scanline{
+    position:absolute;left:0;right:0;height:90px;
+    background:linear-gradient(180deg, transparent, rgba(255,36,56,.14), transparent);
+    animation:scan 6s linear infinite;
+  }
+  .photo-frame span{position:relative;z-index:2;}
+  .author-badge{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--red);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:18px;}
+  .author-copy p{font-size:18px;color:var(--gray);margin-bottom:18px;font-family:'Inter';}
+  .author-quote{
+    border-left:2px solid var(--red);padding:10px 0 10px 22px;margin:24px 0;
+    font-family:'Inter',sans-serif;font-style:italic;font-size:18px;color:var(--white);
+  }
+  .stats-row{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin:32px 0;}
+  .stat{background:var(--bg-panel);padding:26px;}
+  .stat .num{font-family:'Oswald',sans-serif;font-size:32px;font-weight:700;line-height:1.2;color:var(--red);}
+  .stat .lbl{font-family:'Inter',sans-serif;font-size:15px;color:var(--gray);margin-top:8px;}
+
+  /* outcomes list */
+  .outcomes{list-style:none;max-width:740px;}
+  .outcomes li{
+    display:flex;gap:24px;align-items:center;padding:26px 0;border-top:1px solid var(--line-soft);font-size:21px;font-family:'Inter';
+    min-width:0;
+  }
+  .outcomes li > span:last-child{min-width:0;overflow-wrap:break-word;}
+  .outcomes li:last-child{border-bottom:1px solid var(--line-soft);}
+  .outcomes .idx{font-family:'JetBrains Mono',monospace;color:var(--red);font-size:15px;min-width:34px;}
+
+  /* modules */
+  .modules{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+
+  /* modules assembled into one hexagon */
+  .modules-hex-wrap{position:relative;padding:30px 0 10px;}
+  .hex-outline{
+    position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+    width:min(980px,92%);height:auto;opacity:.5;pointer-events:none;z-index:0;
+  }
+  .hex-outline .spin-outline{animation:spin-slow 90s linear infinite;transform-origin:center;}
+  .modules-hex{display:flex;justify-content:center;align-items:flex-start;position:relative;z-index:1;}
+  .hex-col{display:flex;flex-direction:column;gap:8px;}
+  .hex-col + .hex-col{margin-left:-72px;}
+  .hex-col.offset{margin-top:172px;}
+  .hex-crown{position:relative;display:flex;justify-content:center;margin-bottom:-172px;z-index:2;pointer-events:none;}
+  .hex-crown .hex-module{pointer-events:auto;}
+  .hex-module.module.crown{
+    background:linear-gradient(160deg,#2a0a10,#150507) !important;
+    border:1px solid var(--red) !important;
+    box-shadow:0 0 46px var(--red-glow-soft);
+  }
+  .hex-module.module.crown:hover{box-shadow:0 0 60px var(--red-glow);}
+  .hex-module.module.crown .mnum{color:#fff;}
+  .hex-module.module.crown h3{color:var(--red);}
+  .hex-module.module.crown p{color:#cfd0d6;}
+  .hex-module.module{
+    width:380px;height:338px;min-height:0;
+    clip-path:polygon(25% 2%, 75% 2%, 100% 50%, 75% 98%, 25% 98%, 0% 50%);
+    background:var(--bg-panel);
+    border:1px solid var(--line);
+    display:flex;flex-direction:column;justify-content:center;align-items:center;
+    text-align:center;
+    padding:44px 74px;
+    transition:box-shadow .25s, background .25s, border-color .25s;
+  }
+  .hex-module.module:hover{box-shadow:0 0 34px var(--red-glow-soft) inset;background:var(--bg-panel-2);border-color:#3a3d46;}
+  .hex-module.module .mnum{margin-bottom:6px;}
+  .hex-module.module h3{margin:14px 0 10px;}
+  @media(max-width:1140px){
+    .hex-module.module{width:320px;height:288px;padding:38px 62px;}
+    .hex-col + .hex-col{margin-left:-58px;}
+    .hex-col.offset{margin-top:148px;}
+    .hex-crown{margin-bottom:-148px;}
+  }
+  @media(max-width:1000px){
+    .hex-outline{display:none;}
+    .modules-hex-wrap{padding:0;}
+    .modules-hex{display:block;}
+    .hex-col{display:contents;}
+    .hex-crown{margin-bottom:0;}
+    .hex-module.module{
+      width:100%;height:auto;clip-path:none;
+      padding:34px 26px;text-align:left;align-items:flex-start;
+      background:var(--bg-panel);border:1px solid var(--line);border-top:none;
+    }
+    .hex-module.module:first-child{border-top:1px solid var(--line);}
+    .hex-module.module.crown{
+      background:linear-gradient(160deg,#2a0a10,#150507) !important;
+      border:1px solid var(--red) !important;
+    }
+  }
+  .module{
+    background:var(--bg-panel);padding:38px 28px;min-height:270px;
+    display:flex;flex-direction:column;justify-content:space-between;
+    transition:background .25s;position:relative;
+  }
+
+  .module .mnum{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--red);letter-spacing:.08em;text-transform:uppercase;}
+  .module h3{font-size:21px;margin:18px 0 14px;line-height:1.25;text-transform:none;letter-spacing:0;}
+  .module p{font-size:15px;color:var(--gray);font-family:'Inter';}
+
+  /* format */
+  .format-lead{font-size:22px;font-family:'Inter',sans-serif;font-weight:500;max-width:760px;margin-bottom:40px;line-height:1.4;color:var(--white);}
+  .format-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .fcard{background:var(--bg-panel);padding:32px 28px;min-height:160px;}
+  .fcard .fnum{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--red);text-transform:uppercase;letter-spacing:.08em;}
+  .fcard h4{font-family:'Oswald';font-weight:600;font-size:19px;margin:12px 0 10px;text-transform:none;letter-spacing:0;}
+  .fcard p{font-size:15px;color:var(--gray);font-family:'Inter';}
+  .format-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:1px;}
+  .fstat{background:#050506;color:var(--white);padding:32px 20px;text-align:center;position:relative;}
+  .fstat::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:40px;height:2px;background:var(--red);}
+  .fstat .num{font-family:'Oswald',sans-serif;font-size:34px;font-weight:700;color:var(--red);}
+  .fstat .lbl{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--gray);text-transform:uppercase;margin-top:10px;letter-spacing:.06em;}
+
+  /* pricing */
+  .tiers-lead{font-size:19px;color:var(--gray);max-width:680px;margin-bottom:40px;}
+  .tiers{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .tier{background:var(--bg-panel);padding:28px 20px;display:flex;flex-direction:column;justify-content:space-between;min-height:340px;position:relative;transition:background .2s;min-width:0;}
+  .tier ul li{overflow-wrap:break-word;}
+  .tier:hover{background:var(--bg-panel-2);}
+  .tier .tier-hex{
+    width:38px;height:38px;margin-bottom:16px;
+    clip-path:polygon(25% 3%, 75% 3%, 100% 50%, 75% 97%, 25% 97%, 0% 50%);
+    background:linear-gradient(160deg,var(--steel),#0a0a0c);
+    border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--red);
+  }
+  .tier.featured{background:linear-gradient(180deg,#120608,#050506);border:1px solid var(--red-2);position:relative;box-shadow:0 0 40px var(--red-glow-soft) inset;}
+  .tier.featured .tier-hex{background:var(--red);color:#080808;border-color:var(--red);box-shadow:0 0 18px var(--red-glow);}
+  .tier .tname{font-family:'Oswald',sans-serif;font-weight:600;font-size:18px;margin-bottom:6px;text-transform:uppercase;letter-spacing:.02em;min-height:46px;display:flex;align-items:flex-start;}
+  .tier .tseats{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--red);margin-bottom:12px;letter-spacing:.05em;min-height:18px;}
+  .tier.featured .tseats{color:var(--red);}
+  .tier .tpitch{font-size:14px;color:var(--gray);margin-bottom:20px;line-height:1.5;font-family:'Inter';}
+  .tier.featured .tpitch{color:#c9a3a7;}
+  .tier ul{list-style:none;font-size:14px;flex-grow:1;margin-bottom:20px;font-family:'Inter';}
+  .tier ul li{padding:9px 0;border-top:1px solid var(--line-soft);color:var(--gray);}
+  .tier.featured ul li{border-top:1px solid rgba(255,36,56,.2);color:#d8d2d3;}
+  .tier ul li:first-child{border-top:none;}
+  .tier-cta{
+    border:1px solid var(--line);padding:13px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:13px;text-transform:uppercase;letter-spacing:0.05em;color:var(--gray);
+    transition:border-color .2s, color .2s, box-shadow .2s;
+  }
+  .tier-cta:hover{border-color:var(--red);color:var(--red);box-shadow:0 0 16px var(--red-glow-soft);}
+  .tier.featured .tier-cta{border-color:var(--red);color:var(--red);}
+  .tier.featured .tier-cta:hover{background:var(--red);color:#080808;}
+  .scarcity{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--gray-dim);margin-top:24px;text-align:center;letter-spacing:.03em;}
+  .compare-row{margin-top:32px;text-align:center;}
+
+  /* modal */
+  .modal-overlay{
+    display:none;position:fixed;inset:0;background:rgba(4,4,5,.86);
+    z-index:200;align-items:center;justify-content:center;padding:24px;
+    backdrop-filter:blur(4px);
+    overscroll-behavior:contain;
+  }
+  .modal-overlay.open{display:flex;}
+  .modal-box{
+    background:var(--bg-panel);width:100%;max-width:1080px;max-height:85vh;overflow:auto;
+    border:1px solid var(--line);padding:42px;position:relative;
+    box-shadow:0 0 60px rgba(255,36,56,.08);
+    overscroll-behavior:contain;
+  }
+  .modal-close{
+    position:absolute;top:22px;right:24px;font-family:'JetBrains Mono';font-size:26px;
+    background:none;border:none;cursor:pointer;color:var(--gray);line-height:1;transition:color .2s;
+  }
+  .modal-close:hover{color:var(--red);}
+  .modal-box h3{font-size:26px;margin-bottom:10px;text-transform:uppercase;}
+  .modal-box .hint{margin-bottom:28px;color:var(--gray);}
+  .compare-table{width:100%;border-collapse:collapse;font-size:14px;font-family:'Inter';}
+  .compare-table th,.compare-table td{border:1px solid var(--line);padding:12px 10px;text-align:center;vertical-align:middle;color:var(--gray);}
+  .compare-table th{font-family:'JetBrains Mono';text-transform:uppercase;font-size:12px;letter-spacing:0.05em;background:#0a0a0d;color:var(--red);}
+  .compare-table td:first-child,.compare-table th:first-child{text-align:left;font-size:14px;font-family:'Inter';min-width:200px;color:var(--white);}
+  .compare-table td.yes{font-weight:700;color:var(--red);}
+  .compare-table td.no{color:var(--gray-dim);}
+  .compare-table .seats-row td{font-family:'JetBrains Mono';font-weight:700;color:var(--white);}
+  @media(max-width:700px){.modal-box{padding:24px;}.compare-table{font-size:13px;}}
+
+  .policy-content h4{font-family:'Oswald',sans-serif;font-size:16px;text-transform:uppercase;letter-spacing:.03em;color:var(--red);margin:26px 0 10px;}
+  .policy-content h4:first-child{margin-top:0;}
+  .policy-content p{font-size:15px;color:var(--gray);margin-bottom:12px;font-family:'Inter';line-height:1.7;}
+  .policy-content ol,.policy-content ul{margin:0 0 14px 20px;color:var(--gray);font-size:15px;line-height:1.7;font-family:'Inter';}
+  .policy-content li{margin-bottom:6px;}
+  .policy-content .req{margin-top:28px;padding-top:18px;border-top:1px solid var(--line-soft);font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--gray-dim);line-height:1.9;}
+
+  /* bonuses */
+  .bonus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .bonus-card{background:var(--bg-panel);padding:34px 28px;min-height:200px;display:flex;flex-direction:column;justify-content:space-between;transition:background .2s;}
+
+  .bonus-card .bnum{font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--red);text-transform:uppercase;letter-spacing:.06em;}
+  .bonus-card h4{font-size:20px;margin:14px 0 10px;text-transform:none;letter-spacing:0;}
+  .bonus-card p{font-size:15px;color:var(--gray);font-family:'Inter';}
+
+  /* closer */
+  .closer{background:var(--bg);color:var(--white);padding:104px 0;text-align:center;border-bottom:none;position:relative;}
+  .closer .wrap{position:relative;z-index:1;}
+  .closer h2{font-size:44px;max-width:760px;margin:0 auto 24px;line-height:1.2;}
+  .closer p{font-size:18px;color:var(--gray);max-width:620px;margin:0 auto 36px;font-family:'Inter';}
+
+  /* faq */
+  .faq-item{border-top:1px solid var(--line-soft);padding:24px 0;}
+  .faq-item:last-child{border-bottom:1px solid var(--line-soft);}
+  .faq-item summary{cursor:pointer;font-size:20px;font-weight:500;font-family:'Inter',sans-serif;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:16px;color:var(--white);}
+  .faq-item summary > *:first-child,.faq-item summary{min-width:0;}
+  .faq-item summary::-webkit-details-marker{display:none;}
+  .faq-item summary::after{content:'+';font-family:'JetBrains Mono',monospace;font-size:24px;flex-shrink:0;color:var(--red);}
+  .faq-item[open] summary::after{content:'–';}
+  .faq-item p{margin-top:18px;color:var(--gray);font-size:16px;max-width:680px;font-family:'Inter';}
+
+  /* final form */
+  .final{background:var(--bg);color:var(--white);padding:108px 0;border-bottom:none;position:relative;overflow:hidden;}
+  .final .hexgrid-bg{opacity:.35;}
+  .final .sec-head p{color:var(--gray);}
+  .final h2{font-size:48px;}
+  .form-wrap{max-width:500px;position:relative;z-index:1;display:flex;flex-direction:column;}
+  .final-grid{display:grid;grid-template-columns:460px 1fr;gap:48px;align-items:stretch;}
+  .form-photo{
+    position:relative;
+    overflow:hidden;
+    height:100%;
+  }
+  .form-photo img{
+    width:100%;height:100%;object-fit:cover;display:block;
+    
+  }
+  .form-photo::after{
+    
+  }
+  @media(max-width:980px){
+    .final-grid{grid-template-columns:1fr;}
+    .form-photo{display:none;}
+  }
+  .field{margin-bottom:20px;}
+  .field label{display:block;font-family:'JetBrains Mono',monospace;font-size:13px;text-transform:uppercase;letter-spacing:0.06em;color:var(--red);margin-bottom:10px;}
+  .field input,.field select{
+    width:100%;background:#0a0a0c;border:1px solid var(--line);color:var(--white);
+    padding:16px 17px;font-family:'Inter';font-size:16px;transition:border-color .2s;
+  }
+  .field input:focus,.field select:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 1px var(--red-glow-soft);}
+  .field input::placeholder{color:var(--gray-dim);}
+  .field select{
+    appearance:none;-webkit-appearance:none;-moz-appearance:none;
+    font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:.02em;
+    text-transform:none;
+    cursor:pointer;
+    background-color:#0a0a0c;
+    background-image:linear-gradient(160deg, rgba(255,36,56,.05), transparent 60%),
+      url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23ff2438' stroke-width='1.6' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;
+    background-position:0 0, right 18px center;
+    padding-right:44px;
+    transition:border-color .2s, box-shadow .2s, background-color .2s;
+    clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);
+  }
+  .field select:hover{border-color:#3a3d46;background-color:#0d0d10;}
+  @keyframes tier-fill-flash{
+    0%{box-shadow:0 0 0 0 var(--red-glow);border-color:var(--red);}
+    100%{box-shadow:0 0 0 8px transparent;border-color:var(--red);}
+  }
+  .field select.tier-preselected{animation:tier-fill-flash 1s ease-out;}
+  .field select option{
+    color:#f1f2f5;
+    background:#0a0a0c;
+    font-family:'Inter',sans-serif;
+  }
+
+  /* ---------- custom select (hex/red styled dropdown) ---------- */
+  .custom-select{position:relative;}
+  .cs-trigger{
+    width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;
+    background-color:#0a0a0c;
+    background-image:linear-gradient(160deg, rgba(255,36,56,.05), transparent 60%);
+    border:1px solid var(--line);color:var(--white);
+    padding:16px 17px;font-family:'JetBrains Mono',monospace;font-size:14px;letter-spacing:.02em;
+    cursor:pointer;text-align:left;
+    clip-path:polygon(8px 0,100% 0,100% calc(100% - 8px),calc(100% - 8px) 100%,0 100%,0 8px);
+    transition:border-color .2s, box-shadow .2s, background-color .2s;
+  }
+  .cs-trigger:hover{border-color:#3a3d46;background-color:#0d0d10;}
+  .custom-select.open .cs-trigger{border-color:var(--red);box-shadow:0 0 0 1px var(--red-glow-soft);}
+  .cs-trigger .cs-value{color:var(--white);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .cs-trigger .cs-value.placeholder{color:var(--gray-dim);}
+  .cs-arrow{flex-shrink:0;width:12px;height:8px;transition:transform .25s ease;}
+  .cs-arrow path{stroke:var(--red);}
+  .custom-select.open .cs-arrow{transform:rotate(180deg);}
+  .cs-panel{
+    position:absolute;left:0;right:0;top:calc(100% + 8px);z-index:40;
+    background:#0a0a0c;border:1px solid var(--red);
+    box-shadow:0 20px 44px rgba(0,0,0,.55), 0 0 24px var(--red-glow-soft);
+    max-height:280px;overflow-y:auto;
+    overscroll-behavior:contain;
+    list-style:none;
+    opacity:0;visibility:hidden;transform:translateY(-6px);
+    transition:opacity .18s ease, transform .18s ease, visibility .18s;
+    clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);
+  }
+  .custom-select.open .cs-panel{opacity:1;visibility:visible;transform:translateY(0);}
+  .cs-option{
+    padding:13px 17px;font-family:'Inter',sans-serif;font-size:15px;color:var(--gray);
+    cursor:pointer;border-top:1px solid var(--line-soft);
+    transition:background .15s, color .15s, padding-left .15s;
+  }
+  .cs-option:first-child{border-top:none;}
+  .cs-option::before{content:'▸ ';color:var(--red);opacity:0;transition:opacity .15s;}
+  .cs-option:hover,.cs-option.active{background:var(--bg-panel-2);color:var(--white);padding-left:21px;}
+  .cs-option:hover::before,.cs-option.active::before{opacity:1;}
+  .cs-option.selected{color:var(--red);}
+  .cs-panel::-webkit-scrollbar{width:8px;}
+  .cs-panel::-webkit-scrollbar-thumb{background:var(--red);}
+  .custom-select.tier-preselected .cs-trigger{animation:tier-fill-flash 1s ease-out;}
+  .submit-btn{
+    width:100%;background:var(--red);color:#08080a;border:none;
+    padding:19px;font-family:'JetBrains Mono',monospace;font-size:15px;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;
+    margin-top:12px;cursor:pointer;transition:box-shadow .2s;
+    clip-path:polygon(14px 0,100% 0,100% calc(100% - 14px),calc(100% - 14px) 100%,0 100%,0 14px);
+  }
+  .submit-btn:hover{box-shadow:0 0 30px var(--red-glow);}
+  .submit-btn:disabled{opacity:.35;cursor:not-allowed;box-shadow:none;}
+  .consent-field{display:flex;align-items:flex-start;gap:12px;margin-bottom:22px;}
+  .consent-field input[type="checkbox"]{
+    appearance:none;-webkit-appearance:none;
+    width:20px;height:20px;flex-shrink:0;margin-top:2px;
+    border:1px solid var(--line);background:#0a0a0c;
+    cursor:pointer;position:relative;transition:border-color .2s;
+    display:inline-flex;align-items:center;justify-content:center;
+  }
+  .consent-field input[type="checkbox"]:checked{border-color:var(--red);background:var(--red);}
+  .consent-field input[type="checkbox"]:checked::after{
+    content:'';display:block;width:5px;height:9px;
+    border:solid #08080a;border-width:0 2px 2px 0;
+    transform:rotate(45deg) translate(-1px,-1px);
+  }
+  .consent-field label{color:var(--gray);font-size:14px;font-family:'Inter';line-height:1.55;cursor:pointer;text-transform:none;letter-spacing:0;}
+  .consent-field a{color:var(--red);border-bottom:1px solid rgba(255,36,56,.4);}
+  .consent-field a:hover{border-color:var(--red);}
+  .final .hint{color:var(--gray-dim);margin-top:20px;}
+
+  footer{padding:48px 0 36px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--gray-dim);letter-spacing:.08em;border-top:1px solid var(--line-soft);}
+  .footer-inner{display:flex;flex-direction:column;align-items:center;gap:18px;}
+  .footer-brand{color:var(--gray-dim);}
+  .footer-legal-links{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 22px;}
+  .footer-legal-links a{color:var(--gray);transition:color .2s;text-transform:none;letter-spacing:0.02em;font-size:13px;}
+  .footer-legal-links a:hover{color:var(--red);}
+  .footer-requisites{color:var(--gray-dim);font-size:12px;letter-spacing:.04em;text-transform:none;max-width:640px;line-height:1.7;}
+
+  /* ---------- cookie banner ---------- */
+  .cookie-banner{
+    position:fixed;left:0;right:0;bottom:0;z-index:300;
+    background:var(--bg-panel);border-top:1px solid var(--line);
+    padding:22px 28px;
+    display:flex;flex-wrap:wrap;gap:18px;align-items:center;justify-content:center;
+    transform:translateY(120%);transition:transform .5s cubic-bezier(.2,.7,.3,1);
+    box-shadow:0 -10px 40px rgba(0,0,0,.4);
+  }
+  .cookie-banner.show{transform:translateY(0);}
+  .cookie-banner p{font-size:14px;color:var(--gray);max-width:640px;font-family:'Inter';margin:0;}
+  .cookie-banner p a{color:var(--red);border-bottom:1px solid rgba(255,36,56,.4);}
+  .cookie-banner .btn{padding:14px 28px;font-size:13px;flex-shrink:0;}
+
+  /* ---------- preloader ---------- */
+  #preloader{
+    position:fixed;inset:0;z-index:9999;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:20px;
+    background:var(--bg);
+    transition:opacity .6s ease;
+  }
+  body.loaded #preloader{opacity:0;pointer-events:none;}
+  .preload-hex{width:92px;height:92px;transform-origin:center;animation:breathe 2.1s ease-in-out infinite;}
+  .preload-label{opacity:.8;}
+  @keyframes breathe{
+    0%,100%{transform:scale(.88);opacity:.6;}
+    50%{transform:scale(1.08);opacity:1;}
+  }
+
+  /* ---------- background photo slots (scroll with page, subtle parallax) ---------- */
+  .bg-photo{
+    position:absolute;z-index:0;pointer-events:none;
+    width:340px;height:520px;
+    overflow:hidden;
+    will-change:transform;
+    top:8%;
+  }
+  .bg-photo img{
+    width:100%;height:100%;object-fit:cover;display:block;
+    filter:brightness(.28) saturate(.65) contrast(1.05);
+  }
+  .bg-photo-label{
+    position:absolute;bottom:18px;left:18px;z-index:2;
+    font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--gray-dim);
+    text-transform:uppercase;letter-spacing:.08em;
+    opacity:.6;
+  }
+  .bg-photo-left{
+    left:-100px;
+    mask-image:radial-gradient(ellipse 68% 72% at 40% 45%, black 28%, transparent 76%);
+    -webkit-mask-image:radial-gradient(ellipse 68% 72% at 40% 45%, black 28%, transparent 76%);
+  }
+  .bg-photo-right{
+    right:-100px;
+    mask-image:radial-gradient(ellipse 68% 72% at 60% 45%, black 28%, transparent 76%);
+    -webkit-mask-image:radial-gradient(ellipse 68% 72% at 60% 45%, black 28%, transparent 76%);
+  }
+  @media(max-width:1400px){
+    .bg-photo{width:260px;height:400px;opacity:.7;}
+  }
+  @media(max-width:960px){
+    .bg-photo{display:none;}
+  }
+
+  /* ---------- japanese brush kanji marks ---------- */
+  .kanji-mark{
+    position:absolute;
+    font-family:'Noto Serif JP',serif;
+    font-weight:900;
+    color:var(--red);
+    opacity:.07;
+    line-height:1;
+    pointer-events:none;
+    user-select:none;
+    z-index:0;
+    filter:blur(.2px);
+    transform:rotate(-2deg);
+    max-width:100%;
+    overflow:hidden;
+  }
+  .kanji-mark.flicker{animation:kanji-flicker 6s ease-in-out infinite;}
+  @keyframes kanji-flicker{
+    0%,100%{opacity:.06;}
+    45%{opacity:.06;}
+    50%{opacity:.12;}
+    55%{opacity:.06;}
+  }
+
+  /* corner brush-stamp kanji: sits above the block, not behind it */
+  .kanji-stamp{
+    position:absolute;
+    font-family:'Noto Serif JP',serif;
+    font-weight:900;
+    line-height:1;
+    pointer-events:none;
+    user-select:none;
+    z-index:6;
+    letter-spacing:-.02em;
+  }
+  .kanji-stamp.red{color:var(--red);text-shadow:0 2px 22px rgba(255,36,56,.5), 0 0 2px rgba(0,0,0,.6);}
+  .kanji-stamp.white{color:var(--white);opacity:.88;text-shadow:0 2px 18px rgba(0,0,0,.7);}
+  .kanji-stamp.pop{animation:stamp-in .8s cubic-bezier(.2,.7,.3,1) both;}
+  @keyframes stamp-in{
+    0%{opacity:0;transform:scale(1.4) rotate(-14deg);}
+    60%{opacity:1;}
+    100%{opacity:1;transform:scale(1) rotate(var(--rot,-6deg));}
+  }
+
+  @media(max-width:860px){
+    .hero h1{font-size:40px;}
+    .hero-frame{padding:44px 28px;min-height:440px;}
+    .hero-frame .big-hex{display:none;}
+    .grid-cards{grid-template-columns:repeat(2,1fr);}
+    .win-row{grid-template-columns:repeat(2,1fr);}
+    .author-grid{grid-template-columns:1fr;}
+    .photo-frame{height:auto;aspect-ratio:3/4;min-height:0;}
+    .modules{grid-template-columns:repeat(2,1fr);}
+    .format-cards{grid-template-columns:1fr;}
+    .format-stats{grid-template-columns:1fr;}
+    .tiers{grid-template-columns:repeat(2,1fr);}
+    .bonus-grid{grid-template-columns:1fr;}
+    .cost-compare{grid-template-columns:1fr;}
+    section{padding:76px 0;}
+    .wrap{padding:0 20px;}
+  }
+
+  @media(max-width:600px){
+    body{font-size:17px;}
+    section{padding:56px 0;}
+    .navbar{padding:14px 18px;}
+    .logo{font-size:19px;gap:8px;}
+    .logo svg{width:26px;height:26px;}
+    html,body{overflow-x:hidden;max-width:100vw;}
+    .wrap,section,.hero-frame,.final-grid{max-width:100vw;overflow-x:hidden;}
+    .hero{padding-top:24px;padding-bottom:56px;}
+    .hero-frame{padding:58px 20px 40px;min-height:0;}
+    .hero-brand{font-size:12px;letter-spacing:.1em;}
+    .hero-tagline{font-size:11px;letter-spacing:.1em;margin-bottom:20px;}
+    .hero h1{font-size:30px;line-height:1.15;margin-bottom:20px;}
+    .hero p.lead{font-size:16px;margin-top:0;margin-bottom:24px !important;}
+    .btn-row{flex-direction:column;align-items:stretch;gap:14px;}
+    .btn,.btn-outline{width:100%;text-align:center;padding:18px 24px;font-size:14px;}
+    .hint{font-size:13px;text-align:center;}
+    .sec-head{margin-bottom:36px;}
+    .sec-head h2{font-size:28px;}
+    .sec-head p{font-size:16px;}
+
+    /* #portraits — 3 rows of 2 instead of 2 rows of 3 */
+    .grid-cards{grid-template-columns:repeat(2,1fr);}
+    .card{padding:14px 10px;min-height:0;}
+    .card h3{font-size:13px;margin-bottom:6px;line-height:1.2;}
+    .card p{font-size:12px;}
+    .card .tag{font-size:10px;}
+
+    .win-row{grid-template-columns:1fr;}
+    .promise-text{font-size:18px;}
+
+    /* #promise — cost compare stays side by side on mobile */
+    .cost-compare{grid-template-columns:1fr 1fr;}
+    .cost-col{padding:16px 12px;}
+    .cost-col h4{font-size:12px;margin-bottom:12px;}
+    .cost-col ul{font-size:13px;}
+    .cost-col li{padding:8px 0;}
+
+    /* #author — one paragraph + side-by-side stats on mobile */
+    .author-copy p:nth-of-type(2){display:none;}
+    .stats-row{grid-template-columns:1fr 1fr;}
+    .stat{padding:16px 10px;}
+    .stat .num{font-size:22px;}
+    .stat .lbl{font-size:12px;}
+
+    .modules{grid-template-columns:1fr;}
+    .outcomes li{font-size:17px;gap:16px;padding:20px 0;}
+
+    /* #program — 2-column grid on mobile: 3 rows of 2 module tiles,
+       "Новый уровень тебя" spans the full width of both columns */
+    .modules-hex-wrap{display:block;padding:0;overflow:visible;}
+    .hex-outline{display:none;}
+    .modules-hex{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:1px;
+      background:var(--line);
+      border:1px solid var(--line);
+    }
+    .hex-crown{order:-1;margin-bottom:0;display:block;}
+    .hex-col{display:contents;}
+    .hex-module.module{
+      width:100%;height:auto;min-height:0;padding:22px 16px;
+      clip-path:none;
+      text-align:left;align-items:flex-start;justify-content:center;
+      border:none;
+      background:var(--bg-panel);
+    }
+    .hex-module.module .mnum{font-size:11px;}
+    .hex-module.module h3{font-size:15px;margin:8px 0 6px;line-height:1.25;}
+    .hex-module.module p{display:block;font-size:12.5px;}
+    .hex-module.module.crown{
+      width:100%;margin:0 0 1px;padding:26px 20px;min-height:0;
+      clip-path:none;
+      border:1px solid var(--red) !important;
+      text-align:left;align-items:flex-start;
+    }
+    .hex-module.module.crown .mnum{font-size:12px;}
+    .hex-module.module.crown h3{font-size:19px;margin:10px 0 8px;}
+    .hex-module.module.crown p{display:block;font-size:14px;}
+
+    /* #format — 2x2 cards, bottom stats in one row */
+    .format-cards{grid-template-columns:repeat(2,1fr);}
+    .fcard{padding:18px 14px;min-height:0;}
+    .fcard .fnum{font-size:10px;}
+    .fcard h4{font-size:15px;margin:8px 0 6px;}
+    .fcard p{font-size:12.5px;}
+    .format-stats{grid-template-columns:repeat(3,1fr);}
+    .fstat{padding:16px 6px;}
+    .fstat .num{font-size:19px;}
+    .fstat .lbl{font-size:9.5px;}
+
+    /* #tiers — 2x2 grid, 5th tariff spans full width below */
+    .tiers{grid-template-columns:repeat(2,1fr);}
+    .tier{min-height:0;}
+    .tier:nth-child(5){grid-column:1/3;}
+
+    .final h2{font-size:30px;}
+    .final-grid{gap:0;}
+    .closer h2{font-size:28px;}
+    .faq-item summary{font-size:17px;}
+    .modal-box{padding:18px;}
+    .modal-box h3{font-size:20px;}
+    .kanji-mark{font-size:130px !important;opacity:.09 !important;}
+    .kanji-stamp{font-size:36px !important;opacity:.95;}
+    .field input,.field select,.cs-trigger{padding:15px 14px;font-size:15px;}
+    .cookie-banner{padding:18px;flex-direction:column;text-align:center;}
+    .cookie-banner .btn{width:100%;}
+    footer{padding:36px 0 28px;}
+    .footer-legal-links{gap:6px 14px;}
+    .footer-legal-links a{font-size:12px;}
+
+    /* #bonuses — 1 row of 2, 3rd card spans full width below */
+    .bonus-grid{grid-template-columns:repeat(2,1fr);}
+    .bonus-card{padding:20px 16px;min-height:0;}
+    .bonus-card:nth-child(3){grid-column:1/3;}
+
+    /* mobile: keep design flourishes visible instead of hiding bg photos entirely */
+    .bg-photo{
+      display:block;
+      position:absolute;
+      width:120px;height:200px;
+      opacity:.4;
+      top:6%;
+    }
+    .bg-photo-left{left:0;}
+    .bg-photo-right{right:0;}
+    .bg-photo-label{display:none;}
+  }
+
+  /* ---------- extra cyberpunk interactivity ---------- */
+  .global-scan{
+    position:fixed;left:0;right:0;top:0;height:220px;z-index:120;pointer-events:none;
+    background:linear-gradient(180deg, transparent, rgba(255,36,56,.05), transparent);
+    animation:scan 11s linear infinite;
+    mix-blend-mode:screen;
+  }
+
+  .logo svg{transition:transform .5s ease;}
+  .logo:hover svg{transform:rotate(45deg);}
+
+  .nav-links a{transition:color .2s;}
+  .nav-links a{background-image:linear-gradient(var(--red),var(--red));background-repeat:no-repeat;background-position:left bottom;background-size:0% 1px;transition:background-size .25s ease,color .2s;}
+  .nav-links a:hover{background-size:100% 1px;}
+
+  .card,.hex-module.module,.fcard,.bonus-card,.win,.tier{
+    transition:transform .35s cubic-bezier(.2,.7,.3,1), box-shadow .35s, background .25s, border-color .25s;
+  }
+  .card:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(0,0,0,.35), 0 0 0 1px var(--red-glow-soft) inset;background:var(--bg-panel-2);z-index:2;}
+  .fcard:hover,.bonus-card:hover{transform:translateY(-4px);box-shadow:0 16px 34px rgba(0,0,0,.35);background:var(--bg-panel-2);z-index:2;}
+  .win:hover{transform:translateY(-3px);box-shadow:0 0 0 1px var(--red-glow-soft) inset;color:var(--red);}
+  .tier:hover{transform:translateY(-5px);box-shadow:0 20px 40px rgba(0,0,0,.4);}
+  .tier.featured:hover{transform:translateY(-5px) scale(1.01);}
+
+  @keyframes tier-glow{
+    0%,100%{box-shadow:0 0 40px var(--red-glow-soft) inset;}
+    50%{box-shadow:0 0 62px var(--red-glow) inset;}
+  }
+  .tier.featured{animation:tier-glow 3.4s ease-in-out infinite;}
+
+  .tier-hex{transition:transform .4s cubic-bezier(.2,.7,.3,1), box-shadow .3s;}
+  .tier:hover .tier-hex{transform:rotate(90deg);}
+
+  .btn,.btn-outline{position:relative;overflow:hidden;}
+  .btn::before,.btn-outline::before{
+    content:'';position:absolute;top:0;left:-140%;width:60%;height:100%;
+    background:linear-gradient(100deg, transparent, rgba(255,255,255,.35), transparent);
+    transform:skewX(-18deg);transition:left .55s ease;pointer-events:none;
+  }
+  .btn:hover::before,.btn-outline:hover::before{left:140%;}
+
+  .faq-item summary::after{transition:transform .3s ease;display:inline-block;}
+  .faq-item[open] summary::after{transform:rotate(180deg);}
+
+  .hex-icon{transition:transform .3s ease, color .3s ease;}
+  .outcomes li:hover .hex-icon{transform:scale(1.25);color:var(--white);}
+  .outcomes li{transition:padding-left .25s ease;}
+  .outcomes li:hover{padding-left:8px;}
+
+  .stat,.fstat{transition:transform .3s ease, box-shadow .3s ease;}
+  .stat:hover,.fstat:hover{transform:translateY(-3px);box-shadow:0 0 0 1px var(--red-glow-soft) inset;}
+
+  .kanji-stamp{transition:transform .4s ease, filter .4s ease;}
+
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;}
+  }
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<div class="global-scan" aria-hidden="true"></div>
+
+<div id="preloader" aria-hidden="true">
+  <svg class="preload-hex" viewBox="0 0 40 40" fill="none">
+    <polygon points="20,2 35,11 35,29 20,38 5,29 5,11" stroke="#ff2438" stroke-width="1.4"/>
+    <polygon points="20,10 29,15 29,25 20,30 11,25 11,15" stroke="#ff2438" stroke-width="1" opacity=".6"/>
+  </svg>
+  <div class="preload-label mono">Мужайся <span class="cursor">_</span></div>
+</div>
+
+<div id="site-content">
+
+<header>
+  <div class="navbar">
+    <div class="logo">
+      МУЖАЙСЯ
+      <svg viewBox="0 0 40 40" fill="none">
+        <polygon points="20,2 35,11 35,29 20,38 5,29 5,11" stroke="#ff2438" stroke-width="1.4"/>
+        <polygon points="20,10 29,15 29,25 20,30 11,25 11,15" stroke="#ff2438" stroke-width="1" opacity=".6"/>
+      </svg>
+    </div>
+    <nav class="nav-links">
+      <a href="#program">Программа</a>
+      <a href="#format">Формат</a>
+      <a href="#tiers">Тарифы</a>
+      <a href="#bonuses">Бонусы</a>
+      <a href="#faq">Вопросы</a>
+    </nav>
+    <div class="navbar-right">
+      <a href="#form" class="cta">Бесплатный разбор</a>
+      <button class="nav-toggle" id="navToggle" aria-label="Меню" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+  <nav class="mobile-nav" id="mobileNav">
+    <a href="#program">Программа</a>
+    <a href="#format">Формат</a>
+    <a href="#tiers">Тарифы</a>
+    <a href="#bonuses">Бонусы</a>
+    <a href="#faq">Вопросы</a>
+    <a href="#form" class="btn" style="text-align:center;margin-top:8px;">Бесплатный разбор</a>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-frame hud">
+      <span class="bl"></span><span class="br"></span>
+      <div class="hexgrid-bg"></div>
+      <div class="scanline"></div>
+      <div class="big-hex">
+        <svg viewBox="0 0 400 400">
+          <polygon class="spin1" points="200,20 340,110 340,290 200,380 60,290 60,110" fill="none" stroke="#ff2438" stroke-width="1" opacity=".5"/>
+          <polygon class="spin2" points="200,80 300,140 300,260 200,320 100,260 100,140" fill="none" stroke="#ffffff" stroke-width="1" opacity=".18"/>
+          <polygon points="200,140 250,170 250,230 200,260 150,230 150,170" fill="none" stroke="#ff2438" stroke-width="1" opacity=".35"/>
+        </svg>
+      </div>
+      <div class="hero-photo-frame hud">
+        <span class="bl"></span><span class="br"></span>
+        <img src="images/1.png" alt="Рамзес">
+      </div>
+      <span class="kanji-mark" style="left:24px;bottom:-18px;font-size:180px;">力</span>
+      <span class="kanji-stamp red pop" style="--rot:-8deg;right:34px;top:26px;font-size:64px;transform:rotate(-8deg);">武</span>
+      <div class="hero-brand">Мужайся ⬡ программа для мужчин <span class="cursor">_</span></div>
+      <div class="hero-tagline" id="heroTagline">6 месяцев · 6 модулей · 6 уровней управляемости</div>
+      <h1><span class="glitch-wrap" data-text="Стань мужчиной, которого выбирают">Стань мужчиной, которого выбирают</span></h1>
+      <p class="lead" style="margin-top:0;margin-bottom:30px;">За 6 месяцев выстроишь уверенность, внутренний стержень и научишься легко знакомиться с девушками, которые тебе действительно нравятся.</p>
+      <div class="btn-row">
+        <a href="#form" class="btn">Разобрать мою ситуацию — бесплатно</a>
+        <span class="hint">20 минут, не продажа — поймём, подходишь ли тебе формат</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="portraits">
+  <div class="bg-photo bg-photo-left" data-speed="0.06" aria-hidden="true">
+    <img src="images/3.png" alt="">
+    <span class="bg-photo-label">[ рамзес ]</span>
+  </div>
+  <span class="kanji-mark flicker" style="right:-20px;top:10%;font-size:130px;transform:rotate(3deg);">侍</span>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="mono eyebrow">02 // тебе подходит</span>
+      <h2>Узнаёшь себя?</h2>
+      <p>Выбери свою боль.</p>
+    </div>
+    <div class="grid-cards">
+      <div class="card"><div><span class="tag">[ 01 ]</span><h3>Ступор при знакомстве</h3><p>Перед той самой — паникуешь. Слова куда-то исчезают.</p></div></div>
+      <div class="card"><div><span class="tag">[ 02 ]</span><h3>Нестабильные результаты</h3><p>То получается, то нет. И не понимаешь, почему.</p></div></div>
+      <div class="card"><div><span class="tag">[ 03 ]</span><h3>После долгих отношений</h3><p>Отвык знакомиться. Боишься выглядеть нелепо.</p></div></div>
+      <div class="card"><div><span class="tag">[ 04 ]</span><h3>Хочешь девушек красивее, умнее, интереснее</h3><p>С обычными — легко. Перед той самой — сковывает.</p></div></div>
+      <div class="card"><div><span class="tag">[ 05 ]</span><h3>Покупаешь внимание</h3><p>Рестораны, тачки, подарки. А хочешь — просто собой.</p></div></div>
+      <div class="card"><div><span class="tag">[ 06 ]</span><h3>Хочешь вернуть себя</h3><p>Дело не в девушках. Просела опора внутри.</p></div></div>
+    </div>
+    <div style="margin-top:26px;"><a href="#form" class="hint">Не нашёл себя? Расскажи на созвоне →</a></div>
+  </div>
+</section>
+
+<section id="promise">
+  <span class="kanji-mark" style="left:-20px;top:14%;font-size:150px;transform:rotate(-4deg);">剛</span>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="mono eyebrow">03 // точка Б</span>
+      <h2>Вот кем ты станешь</h2>
+      <p>Куда мы тебя приведём за 6 месяцев: управляемая система знакомств, свиданий и отношений — без пикапа, фальшивых образов и покупки внимания.</p>
+    </div>
+
+    <div class="win-row">
+      <div class="win">Подходишь без ступора</div>
+      <div class="win">Знаешь, что сказать дальше</div>
+      <div class="win">Доводишь до свидания</div>
+      <div class="win">Управляешь, а не гадаешь</div>
+    </div>
+
+    <div class="cost-compare">
+      <div class="cost-col negative">
+        <h4>Сейчас</h4>
+        <ul>
+          <li>Боишься подойти к той, что реально нравится</li>
+          <li>Ждёшь идеального момента, который не наступает</li>
+          <li>Гадаешь, что сработает</li>
+        </ul>
+      </div>
+      <div class="cost-col">
+        <h4>Через 6 месяцев</h4>
+        <ul>
+          <li>Подходишь, даже когда страшно</li>
+          <li>Знакомишься, когда сам решил</li>
+          <li>Управляешь общением, а не гадаешь</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="btn-row" style="margin-top:30px;">
+      <a href="#form" class="btn">Разобрать свою ситуацию</a>
+    </div>
+  </div>
+</section>
+
+<section id="author">
+  <div class="bg-photo bg-photo-right" data-speed="0.06" aria-hidden="true">
+    <img src="images/4.png" alt="">
+    <span class="bg-photo-label">[ мотоцикл ]</span>
+  </div>
+  <span class="kanji-mark" style="right:-20px;top:20px;font-size:120px;">心</span>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="mono eyebrow">04 // автор программы</span>
+      <h2>Рамзес</h2>
+    </div>
+    <div class="author-grid">
+      <div class="photo-frame hud">
+        <span class="bl"></span><span class="br"></span>
+        <img src="images/2.png" alt="Рамзес">
+        <div class="scanline"></div>
+      </div>
+      <div class="author-copy">
+        <div class="author-badge">№1 дейтинг-коуч в СНГ · психолог · педагог</div>
+        <p>Меня зовут Рамзес Кубинский. Я автор курса «Мужайся!» — программы, которая учит мужчин брать жизнь под контроль. Мой подход держится не на внешности и не на деньгах, а на харизме, остроумии и правильных действиях — на том, что реально можно натренировать.</p>
+        <p>За годы работы я провёл через программу сотни мужчин — от полного ступора перед разговором до уверенных, но нестабильных результатов. Для меня важно не натаскать тебя на заученные фразы, а вернуть тебе внутреннюю опору, из которой уже само получается всё остальное.</p>
+        <div class="author-quote">«Я больше про то, как дать человеку больше настоящего, живого опыта — а не заменить его чем-то искусственным.»</div>
+        <div class="stats-row">
+          <div class="stat"><div class="num">10+ лет</div><div class="lbl">Практики в дейтинге</div></div>
+          <div class="stat"><div class="num">500+</div><div class="lbl">Учеников прошли программу</div></div>
+        </div>
+        <a href="#form" class="btn btn-outline">Обсудить свою ситуацию</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="outcomes">
+  <span class="kanji-mark" style="right:-30px;bottom:-10%;font-size:180px;transform:rotate(4deg);">魂</span>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="mono eyebrow">05 // по итогу</span>
+      <h2>Что ты получишь</h2>
+    </div>
+    <ul class="outcomes">
+      <li><span class="idx hex-icon">01</span><span>Вернёшь опору и внутренний стержень</span></li>
+      <li><span class="idx hex-icon">02</span><span>Знакомишься, когда сам решил — а не когда повезло</span></li>
+      <li><span class="idx hex-icon">03</span><span>Управляешь общением, а не надеешься на удачу</span></li>
+      <li><span class="idx hex-icon">04</span><span>Выбираешь качественнее, а не то, что само идёт в руки</span></li>
+      <li><span class="idx hex-icon">05</span><span>Вернёшь драйв, азарт и вкус к жизни</span></li>
+    </ul>
+  </div>
+</section>
+
+<section id="program">
+  <div class="bg-photo bg-photo-left" data-speed="0.06" aria-hidden="true">
+    <img src="images/5.png" alt="">
+    <span class="bg-photo-label">[ девушка ]</span>
+  </div>
+  <span class="kanji-mark" style="left:-20px;top:6%;font-size:160px;transform:rotate(-3deg);">道</span>
+  <span class="kanji-stamp white pop" style="--rot:5deg;left:30px;top:24px;font-size:56px;transform:rotate(5deg);">力</span>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="mono eyebrow">06 // программа</span>
+      <h2>6 модулей</h2>
+      <p>Более 30 часов уроков. Каждый модуль — новый уровень контроля.</p>
+    </div>
+    <div class="modules-hex-wrap">
+      <svg class="hex-outline" viewBox="0 0 400 400" aria-hidden="true">
+        <polygon class="spin-outline" points="200,10 360,102 360,298 200,390 40,298 40,102" fill="none" stroke="#ff2438" stroke-width="1"/>
+        <polygon points="200,60 316,128 316,272 200,340 84,272 84,128" fill="none" stroke="#ff2438" stroke-width="0.6" opacity=".5"/>
+      </svg>
+      <div class="hex-crown">
+        <div class="hex-module module crown">
+          <span class="mnum">Точка сборки</span>
+          <h3>Новый уровень тебя</h3>
+          <p>Каждый модуль — отдельный вклад. Здесь они соединяются: ты не проходишь этапы по очереди, а собираешь из них мужчину, который управляет знакомствами, свиданиями и собственной жизнью.</p>
+        </div>
+      </div>
+      <div class="modules-hex">
+        <div class="hex-col">
+          <div class="hex-module module">
+            <span class="mnum">Модуль 01</span>
+            <h3>Опора на себя</h3>
+            <p>Наведёшь порядок в режиме, дисциплине и мышлении. Разберёшь ограничивающие убеждения, поймёшь свои ценности и поставишь чёткие цели на обучение.</p>
+          </div>
+          <div class="hex-module module">
+            <span class="mnum">Модуль 02</span>
+            <h3>Внутри женской головы</h3>
+            <p>Разберёшь 12 триггеров влечения, женские проверки и манипуляции, типы девушек. Поймёшь, что реально привлекает и отталкивает — без мифов и домыслов.</p>
+          </div>
+        </div>
+        <div class="hex-col offset">
+          <div class="hex-module module">
+            <span class="mnum">Модуль 03</span>
+            <h3>«Я решил — я подошёл»</h3>
+            <p>Прокачаешь язык тела, знакомства вживую, сторителлинг и умение считывать реакцию девушки. Перестанешь тупить в моменте знакомства.</p>
+          </div>
+          <div class="hex-module module">
+            <span class="mnum">Модуль 04</span>
+            <h3>Цифровой мост</h3>
+            <p>Научишься переписываться и созваниваться так, чтобы доводить до свидания, а не сливать контакт в пустоту после «привет».</p>
+          </div>
+        </div>
+        <div class="hex-col">
+          <div class="hex-module module">
+            <span class="mnum">Модуль 05</span>
+            <h3>Свидания как кино</h3>
+            <p>Соберёшь сценарии свиданий, которые создают эмоции и близость — без шаблонных ресторанов, неловких пауз и больших трат.</p>
+          </div>
+          <div class="hex-module module">
+            <span class="mnum">Модуль 06</span>
+            <h3>Уединение и секс</h3>
+            <p>Разберёшь логистику сближения, прелюдию, работу с сомнениями девушки и заботу после — уверенно, без давления и неловкости.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="format">
+  <span class="kanji-mark" style="right:-20px;bottom:4%;font-size:170px;transform:rotate(3deg);">誠</span>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="mono eyebrow">07 // формат</span>
+      <h2>Здесь не дают слиться</h2>
+      <p>Без контроля знания не становятся навыком. Соскочить не дадим.</p>
+    </div>
+
+    <div class="format-cards">
+      <div class="fcard"><span class="fnum">ДЗ с проверкой</span><h4>Не для галочки</h4><p>Тренер покажет, где ты облажался — пока это не стоило живой девушки.</p></div>
+      <div class="fcard"><span class="fnum">Мини-группы по 5</span><h4>Слиться не дадут</h4><p>Пропустил неделю — вернут в ритм.</p></div>
+      <div class="fcard"><span class="fnum">Разборы каждую неделю</span><h4>Твои реальные ситуации</h4><p>Не теория — разбор твоих знакомств и переписок.</p></div>
+      <div class="fcard"><span class="fnum">Отслеживание прогресса</span><h4>Видно, если выпадаешь</h4><p>Тихо забросить всё на третьей неделе не получится.</p></div>
+    </div>
+
+    <div class="format-stats">
+      <div class="fstat"><div class="num">6 мес</div><div class="lbl">Сопровождения</div></div>
+      <div class="fstat"><div class="num">30+ ч</div><div class="lbl">Уроков</div></div>
+      <div class="fstat"><div class="num">5 чел</div><div class="lbl">Макс. в группе</div></div>
+    </div>
+
+    <div class="btn-row" style="margin-top:34px;">
+      <a href="#form" class="btn">Узнать, подходишь ли ты</a>
+    </div>
+  </div>
+</section>
+
+<section id="tiers">
+  <div class="bg-photo bg-photo-right" data-speed="0.06" aria-hidden="true">
+    <img src="images/6.png" alt="">
+    <span class="bg-photo-label">[ единоборства ]</span>
+  </div>
+  <span class="kanji-mark" style="left:-10px;bottom:0;font-size:140px;">武</span>
+  <span class="kanji-stamp white pop" style="--rot:-6deg;right:34px;top:20px;font-size:58px;transform:rotate(-6deg);">覇</span>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="mono eyebrow">08 // тарифы</span>
+      <h2>Какой формат тебя вытащит</h2>
+      <p>От самостоятельного темпа до личного наставничества Рамзеса.</p>
+    </div>
+
+    <div class="tiers">
+      <div class="tier">
+        <div>
+          <div class="tier-hex">01</div>
+          <div class="tname">Самостоятельный</div>
+          <div class="tseats">20 мест</div>
+          <div class="tpitch">В своём темпе. Ответственность на тебе.</div>
+          <ul>
+            <li>6 модулей + база знаний + I AM</li>
+            <li>Общий чат и разборы раз в месяц</li>
+            <li>Без проверки ДЗ и мини-группы</li>
+          </ul>
+        </div>
+        <a href="#form" class="tier-cta" onclick="selectTier('Самостоятельный')">Узнать на созвоне</a>
+      </div>
+
+      <div class="tier">
+        <div>
+          <div class="tier-hex">02</div>
+          <div class="tname">Сопровождение в пятёрках</div>
+          <div class="tseats">15 мест</div>
+          <div class="tpitch">Тренер не даст слиться.</div>
+          <ul>
+            <li>Мини-группа 5 человек с тренером</li>
+            <li>Проверка ДЗ + трекинг прогресса</li>
+            <li>Texting Ninja и VIBE AI в комплекте</li>
+          </ul>
+        </div>
+        <a href="#form" class="tier-cta" onclick="selectTier('Сопровождение в пятёрках')">Узнать на созвоне</a>
+      </div>
+
+      <div class="tier featured hud">
+        <span class="bl"></span><span class="br"></span>
+        <div>
+          <div class="tier-hex">03</div>
+          <div class="tname">Мастер-группа с Рамзесом</div>
+          <div class="tseats">10 мест</div>
+          <div class="tpitch">Учишься напрямую у автора.</div>
+          <ul>
+            <li>Мини-группа с Рамзесом лично</li>
+            <li>Полные разборы знакомств (12+ ч)</li>
+            <li>Сессия на проработку убеждений</li>
+          </ul>
+        </div>
+        <a href="#form" class="tier-cta" onclick="selectTier('Мастер-группа с Рамзесом')">Узнать на созвоне</a>
+      </div>
+
+      <div class="tier">
+        <div>
+          <div class="tier-hex">04</div>
+          <div class="tname">Буткемп в Москве</div>
+          <div class="tseats">4 места</div>
+          <div class="tpitch">Результат за недели, вживую.</div>
+          <ul>
+            <li>Живое обучение, группа 3-4 человека</li>
+            <li>3 выхода в поля в неделю с Рамзесом</li>
+            <li>Безлимитная обратная связь весь месяц</li>
+          </ul>
+        </div>
+        <a href="#form" class="tier-cta" onclick="selectTier('Буткемп в Москве')">Узнать на созвоне</a>
+      </div>
+
+      <div class="tier">
+        <div>
+          <div class="tier-hex">05</div>
+          <div class="tname">Индива 1-на-1</div>
+          <div class="tseats">1 место</div>
+          <div class="tpitch">Рамзес ведёт лично, как тренер и психолог.</div>
+          <ul>
+            <li>Личное наставничество с Рамзесом</li>
+            <li>Совместные выходы 3 раза в неделю</li>
+            <li>Безлимитная поддержка 6 недель</li>
+          </ul>
+        </div>
+        <a href="#form" class="tier-cta" onclick="selectTier('Индива 1-на-1')">Узнать на созвоне</a>
+      </div>
+    </div>
+
+    <p class="scarcity">Мест немного — особенно в буткемпе (4) и индиве (1). Точное наличие уточняем на созвоне.</p>
+    <div class="compare-row">
+      <button class="btn btn-outline" onclick="document.getElementById('tierModal').classList.add('open')">Сравнить тарифы</button>
+    </div>
+  </div>
+</section>
+
+<div class="modal-overlay" id="tierModal" onclick="if(event.target===this) this.classList.remove('open')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('tierModal').classList.remove('open')">×</button>
+    <h3>Все тарифы построчно</h3>
+    <p class="hint">Полный состав каждого формата — чтобы ты выбирал осознанно.</p>
+    <table class="compare-table">
+      <thead>
+        <tr>
+          <th>Что входит</th>
+          <th>Самостоятельный</th>
+          <th>Пятёрки</th>
+          <th>Мастер-группа</th>
+          <th>Буткемп</th>
+          <th>Индива</th>
+        </tr>
+      </thead>
+      <tbody>
+  <tr><td>6 основных модулей Мужайся! (более 30 часов уроков)</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+
+  <tr><td>База знаний: дополнительные уроки от Рамзеса и приглашённых спикеров</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+
+  <tr><td>Мини-курс по уверенности в себе I AM</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+
+  <tr><td>Курс по онлайн-дэйтингу и перепискам Texting Ninja</td><td class="no">—</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+
+  <tr><td>Дополнительные конспекты и другие материалы</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+
+  <tr><td>Видео знакомств Рамзеса</td><td>Фрагменты</td><td>Полные, 12+ ч</td><td>Полные, 12+ ч</td><td>Полные, 12+ ч</td><td>Полные, 12+ ч</td></tr>
+
+  <tr><td>Мини-группа</td><td class="no">—</td><td>5 человек, тренер проекта</td><td>5 человек, Рамзес</td><td>3-4 человека, Рамзес вживую</td><td>1 на 1 с Рамзесом</td></tr>
+
+  <tr><td>Отдельный чат группы</td><td class="no">—</td><td>Чат пятёрки с тренером</td><td>Чат мастер-группы с Рамзесом</td><td>Чат буткемпа с Рамзесом</td><td>Чат с Рамзесом для индивидуальной работы</td></tr>
+
+  <tr><td>Проверка домашних заданий</td><td class="no">—</td><td>Проверка домашних заданий</td><td>Развёрнутая обратная связь от Рамзеса</td><td>Развёрнутая обратная связь от Рамзеса</td><td>Развёрнутая обратная связь от Рамзеса</td></tr>
+
+  <tr><td>Трекинг прогресса</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+
+  <tr><td>Мастермайнды / выходы</td><td class="no">—</td><td>Еженедельно, тренер пятёрки</td><td>Еженедельно, Рамзес</td><td>3 групповых выхода в поля еженедельно</td><td>Индивидуальные выходы 3 раза в неделю</td></tr>
+
+  <tr><td>Сессия на убеждения</td><td class="no">—</td><td class="no">—</td><td>1 личная сессия с Рамзесом</td><td>1 личная сессия с Рамзесом</td><td>Безлимитная работа с убеждениями 6 недель</td></tr>
+
+  <tr><td>Общий чат участников</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+
+  <tr><td>Групповые онлайн-разборы с Рамзесом раз в месяц</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+
+  <tr><td>VIBE AI, подписка 6 месяцев</td><td class="no">—</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td><td class="yes">✓</td></tr>
+
+  <tr><td>Живое наставничество</td><td class="no">—</td><td class="no">—</td><td class="no">—</td><td>Групповое живое наставничество в Москве</td><td>Полное живое ведение 1 на 1 с Рамзесом</td></tr>
+
+  <tr class="seats-row"><td>Мест в потоке</td><td>20</td><td>15</td><td>10</td><td>4</td><td>1</td></tr>
+</tbody>
+    </table>
+  </div>
+</div>
+
+<section id="bonuses">
+  <span class="kanji-mark" style="left:-20px;top:8%;font-size:140px;transform:rotate(-5deg);">勇</span>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="mono eyebrow">09 // бонусы</span>
+      <h2>Что ещё входит</h2>
+      <p>Плюс к программе — на всех тарифах, где отмечено выше.</p>
+    </div>
+    <div class="bonus-grid">
+      <div class="bonus-card">
+        <div><span class="bnum">[ бонус 01 ]</span><h4>База знаний</h4><p>Дополнительные уроки от Рамзеса и приглашённых спикеров сверх основной программы.</p></div>
+      </div>
+      <div class="bonus-card">
+        <div><span class="bnum">[ бонус 02 ]</span><h4>Мини-курс I AM</h4><p>Отдельный курс по уверенности в себе — про то, что держит тебя, когда сложно.</p></div>
+      </div>
+      <div class="bonus-card">
+        <div><span class="bnum">[ бонус 03 ]</span><h4>VIBE AI на 6 месяцев</h4><p>ИИ-помощник для переписок: разбирает диалоги и подсказывает фразы, когда тупишь в моменте.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="final" id="form">
+  <div class="hexgrid-bg"></div>
+  <span class="kanji-mark" style="right:-30px;top:6%;font-size:170px;transform:rotate(-3deg);">誓</span>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="mono eyebrow">10 // заявка</span>
+      <h2>Мужайся.<br>Запишись на разбор</h2>
+      <p>Бесплатный созвон, 20 минут — не продажа. Разберём твою ситуацию и подберём формат.</p>
+    </div>
+    <div class="final-grid">
+    <div class="form-wrap">
+      <div class="field"><label>Имя</label><input type="text" placeholder="Как к тебе обращаться"></div>
+      <div class="field"><label>Telegram или телефон</label><input type="text" placeholder="@username или +7"></div>
+      <div class="field">
+        <label>Что откликнулось больше всего</label>
+        <div class="custom-select" data-select-id="painSelect">
+          <button type="button" class="cs-trigger" aria-haspopup="listbox" aria-expanded="false">
+            <span class="cs-value placeholder">Выбери вариант</span>
+            <svg class="cs-arrow" viewBox="0 0 12 8"><path d="M1 1l5 5 5-5" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="cs-panel" role="listbox">
+            <li class="cs-option" data-value="Ступор при знакомстве" role="option">Ступор при знакомстве</li>
+            <li class="cs-option" data-value="Нестабильные результаты" role="option">Нестабильные результаты</li>
+            <li class="cs-option" data-value="После долгих отношений" role="option">После долгих отношений</li>
+            <li class="cs-option" data-value="Хочу девушек качественнее" role="option">Хочу девушек качественнее</li>
+            <li class="cs-option" data-value="Покупаю внимание, хочу иначе" role="option">Покупаю внимание, хочу иначе</li>
+            <li class="cs-option" data-value="Хочу вернуть себя" role="option">Хочу вернуть себя</li>
+            <li class="cs-option" data-value="Ищу отношения" role="option">Ищу отношения</li>
+          </ul>
+          <select class="cs-native" id="painSelect" hidden>
+            <option value="">Выбери вариант</option>
+            <option>Ступор при знакомстве</option>
+            <option>Нестабильные результаты</option>
+            <option>После долгих отношений</option>
+            <option>Хочу девушек качественнее</option>
+            <option>Покупаю внимание, хочу иначе</option>
+            <option>Хочу вернуть себя</option>
+            <option>Ищу отношения</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <label>Формат, который интересен</label>
+        <div class="custom-select" data-select-id="formatSelect">
+          <button type="button" class="cs-trigger" aria-haspopup="listbox" aria-expanded="false">
+            <span class="cs-value placeholder">Пока не знаю — подскажите</span>
+            <svg class="cs-arrow" viewBox="0 0 12 8"><path d="M1 1l5 5 5-5" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <ul class="cs-panel" role="listbox">
+            <li class="cs-option" data-value="Самостоятельный" role="option">Самостоятельный</li>
+            <li class="cs-option" data-value="Сопровождение в пятёрках" role="option">Сопровождение в пятёрках</li>
+            <li class="cs-option" data-value="Мастер-группа с Рамзесом" role="option">Мастер-группа с Рамзесом</li>
+            <li class="cs-option" data-value="Буткемп в Москве" role="option">Буткемп в Москве</li>
+            <li class="cs-option" data-value="Индива 1-на-1" role="option">Индива 1-на-1</li>
+          </ul>
+          <select class="cs-native" id="formatSelect" hidden>
+            <option value="">Пока не знаю — подскажите</option>
+            <option>Самостоятельный</option>
+            <option>Сопровождение в пятёрках</option>
+            <option>Мастер-группа с Рамзесом</option>
+            <option>Буткемп в Москве</option>
+            <option>Индива 1-на-1</option>
+          </select>
+        </div>
+      </div>
+      <div class="field"><label>Доход в месяц</label><input type="text" placeholder="Укажи сумму или диапазон"></div>
+      <div class="field consent-field">
+        <input type="checkbox" id="consentCheckbox">
+        <label for="consentCheckbox">Даю согласие на <a href="#" onclick="openPolicy('consent-pd');return false;">обработку персональных данных</a> и принимаю <a href="#" onclick="openPolicy('offer');return false;">условия оферты</a></label>
+      </div>
+      <button class="submit-btn" id="submitBtn" disabled>Отправить заявку</button>
+      <p class="hint" id="consentHint" style="margin-top:12px;">Отметь согласие выше, чтобы отправить заявку.</p>
+    </div>
+    <div class="form-photo">
+      <img src="images/7.png" alt="Рамзес">
+    </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <span class="kanji-mark" style="right:-20px;bottom:2%;font-size:150px;transform:rotate(4deg);">雄</span>
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="mono eyebrow">11 // вопросы</span>
+      <h2>Что может тебя остановить</h2>
+    </div>
+    <div>
+      <details class="faq-item"><summary>У меня реально ступор, даже в переписке. Это точно про меня?</summary><p>Модуль 1 целиком про это. Большинство участников стартуют именно с полного ступора, а не с продвинутого уровня.</p></details>
+      <details class="faq-item"><summary>Сколько времени нужно уделять в неделю?</summary><p>Пара часов на уроки и практику. Это не марафон 24/7, а регулярные маленькие шаги, которые складываются в навык.</p></details>
+      <details class="faq-item"><summary>А если я не готов на дорогой тариф?</summary><p>Самостоятельный формат даёт всю программу целиком. Тренер и мини-группа ускоряют процесс, но не обязательны для результата.</p></details>
+      <details class="faq-item"><summary>Мне не 20, а 35-45. Это ещё работает?</summary><p>Программу проходят мужчины разных возрастов. Психология влечения и навык знакомства не завязаны на возраст.</p></details>
+      <details class="faq-item"><summary>Это пикап с заучиванием фраз?</summary><p>Нет. Упор на своё, живое поведение и понимание себя и женщин — не на скрипты и роли.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="closer">
+  <span class="kanji-mark" style="left:50%;top:50%;transform:translate(-50%,-50%) rotate(-2deg);font-size:340px;opacity:.06;">道</span>
+  <span class="kanji-stamp red pop" style="--rot:-4deg;left:50%;top:24px;transform:translateX(-50%) rotate(-4deg);font-size:60px;">魂</span>
+  <div class="wrap">
+    <h2>Либо ты действуешь. Либо снова смотришь, как выбирают не тебя.</h2>
+    <p>Один клик отделяет мужчину, который решил, от того, кто опять отложил на завтра.</p>
+    <a href="#form" class="btn">Записаться на разбор</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap footer-inner">
+    <div class="footer-brand">МУЖАЙСЯ · СИСТЕМА 2026</div>
+    <nav class="footer-legal-links">
+      <a href="#" onclick="openPolicy('offer');return false;">Договор оферты</a>
+      <a href="#" onclick="openPolicy('privacy');return false;">Политика конфиденциальности</a>
+      <a href="#" onclick="openPolicy('pd');return false;">Политика обработки персональных данных</a>
+      <a href="#" onclick="openPolicy('consent-pd');return false;">Согласие на обработку персональных данных</a>
+      <a href="#" onclick="openPolicy('consent-ads');return false;">Согласие на рассылки</a>
+      <a href="#" onclick="openPolicy('cookies');return false;">Политика использования cookie</a>
+    </nav>
+    <div class="footer-requisites">ИП Акбутаев Рустам Тимурович · ИНН 770974041537 · ОГРНИП 323774600546391</div>
+  </div>
+</footer>
+
+<div class="modal-overlay" id="policy-offer" onclick="if(event.target===this) this.classList.remove('open')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('policy-offer').classList.remove('open')">×</button>
+    <h3>Договор оферты</h3>
+    <p class="hint">Публичная оферта на оказание информационно-консультационных услуг «Мужайся!»</p>
+    <div class="policy-content">
+      <h4>1. Общие положения</h4>
+      <p>Настоящий документ является публичной офертой Индивидуального предпринимателя Акбутаева Рустама Тимуровича (далее — «Исполнитель») и содержит все существенные условия оказания информационно-консультационных услуг в рамках программы «Мужайся!» (далее — «Программа»). В соответствии со статьёй 437 Гражданского кодекса РФ данный документ является публичной офертой, адресованной неограниченному кругу физических лиц.</p>
+      <p>Акцептом настоящей оферты признаётся совершение любого из следующих действий: заполнение заявки на сайте, оплата доступа к Программе любым из предложенных способов, устное или письменное подтверждение согласия на участие в созвоне-разборе. С момента совершения акцепта договор считается заключённым.</p>
+      <h4>2. Предмет договора</h4>
+      <p>Исполнитель обязуется предоставить Заказчику доступ к образовательным и консультационным материалам Программы (видеоуроки, текстовые материалы, групповые и индивидуальные разборы, сопровождение в чатах — в объёме, соответствующем выбранному тарифу), а Заказчик обязуется оплатить услуги в порядке и на условиях, указанных на сайте и/или согласованных на созвоне с командой проекта.</p>
+      <p>Конкретный состав услуг, длительность доступа и формат сопровождения определяются выбранным тарифом и фиксируются в переписке или счёте на оплату.</p>
+      <h4>3. Порядок оказания услуг</h4>
+      <ol>
+        <li>Доступ к материалам предоставляется в течение 1–3 рабочих дней с момента поступления оплаты.</li>
+        <li>Услуги оказываются дистанционно через мессенджеры, платформу для видеоуроков и созвоны в формате видеоконференций.</li>
+        <li>Заказчик самостоятельно обеспечивает техническую возможность получения услуг (интернет-соединение, устройство, установленные приложения).</li>
+      </ol>
+      <h4>4. Стоимость и порядок оплаты</h4>
+      <p>Стоимость участия зависит от выбранного тарифа и указывается на сайте или сообщается индивидуально на созвоне-разборе. Оплата производится в рублях РФ безналичным способом, включая переводы на карту, через платёжные системы или по реквизитам ИП.</p>
+      <p>Исполнитель вправе предоставлять индивидуальные скидки, рассрочку и промоакции, условия которых сообщаются дополнительно и не изменяют настоящую оферту.</p>
+      <h4>5. Права и обязанности сторон</h4>
+      <p>Исполнитель обязуется предоставить материалы надлежащего качества и оказывать разумное содействие в освоении Программы. Исполнитель не гарантирует конкретный личный результат, так как он зависит от вовлечённости и действий самого Заказчика.</p>
+      <p>Заказчик обязуется добросовестно использовать материалы Программы, не передавать доступ третьим лицам и соблюдать правила общения в групповых чатах и на созвонах.</p>
+      <h4>6. Отказ от услуг и возврат</h4>
+      <p>Заказчик вправе отказаться от услуг до момента получения доступа к материалам с полным возвратом оплаченной суммы. После предоставления доступа возврат производится пропорционально фактически не оказанным услугам, за вычетом фактически понесённых Исполнителем расходов, в соответствии со статьёй 782 ГК РФ и Законом РФ «О защите прав потребителей».</p>
+      <h4>7. Ответственность и конфиденциальность</h4>
+      <p>Стороны обязуются сохранять конфиденциальность информации, которой обмениваются в рамках Программы, включая личные ситуации, обсуждаемые на разборах. Исполнитель не несёт ответственности за действия Заказчика, совершённые в реальной жизни на основе полученных рекомендаций.</p>
+      <h4>8. Срок действия и изменение условий</h4>
+      <p>Оферта действует бессрочно до момента её отзыва Исполнителем. Исполнитель вправе вносить изменения в условия оферты в одностороннем порядке, размещая актуальную редакцию на сайте. Действующей считается редакция на момент акцепта.</p>
+      <div class="req">Исполнитель: ИП Акбутаев Рустам Тимурович · ИНН 770974041537 · ОГРНИП 323774600546391</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="policy-privacy" onclick="if(event.target===this) this.classList.remove('open')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('policy-privacy').classList.remove('open')">×</button>
+    <h3>Политика конфиденциальности</h3>
+    <p class="hint">Условия использования сайта и обработки информации о посетителях проекта «Мужайся!»</p>
+    <div class="policy-content">
+      <h4>1. Общие положения</h4>
+      <p>Настоящая Политика конфиденциальности определяет порядок обработки и защиты информации о пользователях сайта проекта «Мужайся!», которую Индивидуальный предприниматель Акбутаев Рустам Тимурович (далее — «Оператор») получает в процессе использования сайта, заполнения форм заявок и общения через мессенджеры.</p>
+      <p>Используя сайт, оставляя заявку или переходя по ссылкам на созвон, пользователь подтверждает согласие с условиями настоящей Политики. Если пользователь не согласен с условиями — использование сайта следует прекратить.</p>
+      <h4>2. Какая информация собирается</h4>
+      <ul>
+        <li>Имя, указанное в форме заявки;</li>
+        <li>Контактные данные — телефон и/или Telegram;</li>
+        <li>Ответы на уточняющие вопросы формы (боль, интересующий тариф, уровень дохода);</li>
+        <li>Технические данные — IP-адрес, тип устройства и браузера, источник перехода (для аналитики рекламных кампаний);</li>
+        <li>Файлы cookie, используемые для корректной работы сайта и аналитики посещаемости.</li>
+      </ul>
+      <h4>3. Цели обработки</h4>
+      <p>Информация используется исключительно для связи с пользователем по поводу бесплатного разбора ситуации, подбора подходящего формата участия в Программе, информирования об условиях и акциях, а также для улучшения работы сайта и рекламных кампаний.</p>
+      <h4>4. Передача данных третьим лицам</h4>
+      <p>Оператор не продаёт и не передаёт персональные данные третьим лицам, за исключением технических подрядчиков (хостинг, платформы аналитики, сервисы рассылок), которые обрабатывают данные исключительно в объёме, необходимом для выполнения своих функций, и обязаны соблюдать конфиденциальность.</p>
+      <h4>5. Хранение и защита данных</h4>
+      <p>Данные хранятся на защищённых серверах с ограниченным доступом. Оператор принимает разумные организационные и технические меры для защиты информации от несанкционированного доступа, изменения, раскрытия или уничтожения.</p>
+      <h4>6. Права пользователя</h4>
+      <p>Пользователь вправе в любой момент запросить информацию о том, какие данные о нём хранятся, потребовать их исправления или удаления, а также отозвать согласие на обработку, обратившись в Telegram, указанный на сайте.</p>
+      <h4>7. Изменения политики</h4>
+      <p>Оператор вправе вносить изменения в настоящую Политику. Актуальная редакция всегда доступна на сайте по соответствующей ссылке в подвале страницы.</p>
+      <div class="req">Оператор: ИП Акбутаев Рустам Тимурович · ИНН 770974041537 · ОГРНИП 323774600546391</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="policy-pd" onclick="if(event.target===this) this.classList.remove('open')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('policy-pd').classList.remove('open')">×</button>
+    <h3>Политика обработки персональных данных</h3>
+    <p class="hint">В соответствии с требованиями Федерального закона от 27.07.2006 № 152-ФЗ «О персональных данных»</p>
+    <div class="policy-content">
+      <h4>1. Термины</h4>
+      <p>Персональные данные — любая информация, относящаяся прямо или косвенно к определённому физическому лицу (субъекту персональных данных). Оператор — ИП Акбутаев Рустам Тимурович, самостоятельно организующий и осуществляющий обработку персональных данных.</p>
+      <h4>2. Состав обрабатываемых данных</h4>
+      <p>Оператор обрабатывает следующие персональные данные субъектов, оставивших заявку на сайте: фамилия, имя; номер телефона; идентификатор в Telegram; сведения, указанные в свободной форме заявки (обстоятельства, интересующий формат обучения, уровень дохода).</p>
+      <h4>3. Цели обработки</h4>
+      <p>Данные обрабатываются в целях исполнения обязательств по договору оферты, предоставления информации о Программе, проведения бесплатного разбора ситуации, а также для внутренней статистики и повышения качества сервиса.</p>
+      <h4>4. Правовые основания обработки</h4>
+      <p>Обработка осуществляется на основании согласия субъекта персональных данных, полученного при заполнении формы на сайте, а также в целях исполнения договора, стороной которого является субъект персональных данных.</p>
+      <h4>5. Условия обработки</h4>
+      <ol>
+        <li>Обработка данных осуществляется с использованием средств автоматизации и без таковых.</li>
+        <li>Данные не обрабатываются в целях, несовместимых с целями сбора.</li>
+        <li>Оператор принимает меры, необходимые для предотвращения несанкционированного доступа к данным.</li>
+        <li>Сроки хранения данных ограничены достижением целей обработки либо сроком, установленным законодательством РФ.</li>
+      </ol>
+      <h4>6. Трансграничная передача</h4>
+      <p>В случае использования зарубежных сервисов (мессенджеры, хостинг) трансграничная передача данных осуществляется с соблюдением требований статьи 12 Федерального закона № 152-ФЗ.</p>
+      <h4>7. Права субъекта персональных данных</h4>
+      <p>Субъект персональных данных вправе получать сведения об обработке своих данных, требовать их уточнения, блокирования или уничтожения в случае, если данные являются неполными, устаревшими, неточными, незаконно полученными, а также отозвать согласие на обработку в любой момент.</p>
+      <h4>8. Уничтожение данных</h4>
+      <p>По достижении целей обработки, а также в случае отзыва согласия субъектом, персональные данные подлежат уничтожению либо обезличиванию в срок, не превышающий 30 календарных дней.</p>
+      <div class="req">Оператор персональных данных: ИП Акбутаев Рустам Тимурович · ИНН 770974041537 · ОГРНИП 323774600546391</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="policy-consent-pd" onclick="if(event.target===this) this.classList.remove('open')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('policy-consent-pd').classList.remove('open')">×</button>
+    <h3>Согласие на обработку персональных данных</h3>
+    <p class="hint">Заполняя форму на сайте, пользователь предоставляет согласие на следующих условиях</p>
+    <div class="policy-content">
+      <h4>1. Субъект согласия</h4>
+      <p>Я, действуя свободно, своей волей и в своём интересе, заполняя форму заявки на сайте проекта «Мужайся!», даю согласие ИП Акбутаеву Рустаму Тимуровичу (далее — «Оператор») на обработку моих персональных данных на условиях, изложенных ниже.</p>
+      <h4>2. Перечень данных, на обработку которых даётся согласие</h4>
+      <ul>
+        <li>Имя;</li>
+        <li>Номер телефона и/или идентификатор в Telegram;</li>
+        <li>Сведения, указанные в форме заявки (интересующий формат, обстоятельства, уровень дохода);</li>
+        <li>Технические данные о посещении сайта (cookie, IP-адрес, источник перехода).</li>
+      </ul>
+      <h4>3. Перечень действий с персональными данными</h4>
+      <p>Согласие даётся на осуществление следующих действий: сбор, запись, систематизацию, накопление, хранение, уточнение, извлечение, использование, передачу (предоставление, доступ) техническим подрядчикам Оператора, блокирование, удаление, уничтожение персональных данных как с использованием средств автоматизации, так и без таковых.</p>
+      <h4>4. Цель обработки</h4>
+      <p>Данные обрабатываются с целью связи по вопросам участия в Программе «Мужайся!», проведения бесплатного разбора ситуации, информирования о тарифах и условиях, а также для статистики и улучшения сайта.</p>
+      <h4>5. Срок действия согласия</h4>
+      <p>Согласие действует бессрочно с момента заполнения формы и может быть отозвано в любой момент путём направления соответствующего уведомления Оператору через Telegram, указанный на сайте. Отзыв согласия не влияет на законность обработки, произведённой до момента отзыва.</p>
+      <h4>6. Подтверждение</h4>
+      <p>Отправляя форму заявки на сайте, пользователь подтверждает, что ознакомлен с условиями настоящего согласия, а также с Политикой конфиденциальности и Политикой обработки персональных данных, размещёнными на сайте.</p>
+      <div class="req">Оператор: ИП Акбутаев Рустам Тимурович · ИНН 770974041537 · ОГРНИП 323774600546391</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="policy-consent-ads" onclick="if(event.target===this) this.classList.remove('open')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('policy-consent-ads').classList.remove('open')">×</button>
+    <h3>Согласие на получение рекламных и информационных рассылок</h3>
+    <p class="hint">Условия подписки на сообщения от проекта «Мужайся!»</p>
+    <div class="policy-content">
+      <h4>1. Предмет согласия</h4>
+      <p>Заполняя форму заявки на сайте и/или указывая номер телефона либо идентификатор в Telegram, я даю согласие ИП Акбутаеву Рустаму Тимуровичу на направление в мой адрес рекламных и информационных сообщений, связанных с Программой «Мужайся!» и сопутствующими продуктами (в том числе VIBE AI, Texting Ninja, I AM).</p>
+      <h4>2. Каналы рассылки</h4>
+      <ul>
+        <li>Сообщения в Telegram;</li>
+        <li>SMS и звонки на указанный номер телефона;</li>
+        <li>Электронная почта, если она указана дополнительно.</li>
+      </ul>
+      <h4>3. Содержание рассылок</h4>
+      <p>Рассылки могут содержать информацию о старте потоков, изменении тарифов, акциях и скидках, приглашения на бесплатные разборы и вебинары, а также образовательные материалы по теме Программы.</p>
+      <h4>4. Периодичность и отказ от рассылки</h4>
+      <p>Периодичность сообщений определяется Оператором и не является чрезмерной по отношению к целям информирования. Пользователь вправе в любой момент отказаться от получения рассылки, направив соответствующее сообщение в Telegram Оператора или используя ссылку отписки, если она предусмотрена в конкретном канале.</p>
+      <h4>5. Срок действия</h4>
+      <p>Согласие действует до момента его отзыва пользователем и не ограничено сроком.</p>
+      <div class="req">Оператор: ИП Акбутаев Рустам Тимурович · ИНН 770974041537 · ОГРНИП 323774600546391</div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="policy-cookies" onclick="if(event.target===this) this.classList.remove('open')">
+  <div class="modal-box">
+    <button class="modal-close" onclick="document.getElementById('policy-cookies').classList.remove('open')">×</button>
+    <h3>Политика использования файлов cookie</h3>
+    <p class="hint">Как сайт проекта «Мужайся!» использует cookie и похожие технологии</p>
+    <div class="policy-content">
+      <h4>1. Что такое cookie</h4>
+      <p>Файлы cookie — это небольшие текстовые файлы, которые сохраняются в браузере пользователя при посещении сайта. Они позволяют сайту запоминать действия и настройки посетителя на определённый срок, чтобы не запрашивать их повторно при каждом переходе между страницами.</p>
+      <h4>2. Какие cookie использует сайт</h4>
+      <ul>
+        <li><strong>Технические cookie</strong> — обеспечивают базовую работу сайта: отображение элементов, работу форм, всплывающих окон и меню;</li>
+        <li><strong>Аналитические cookie</strong> — собирают обезличенную статистику посещений, помогают понять, какие разделы сайта интересны пользователям;</li>
+        <li><strong>Рекламные cookie</strong> — используются для оценки эффективности рекламных кампаний и источника перехода на сайт (например, из Instagram или Telegram);</li>
+        <li><strong>Cookie предпочтений</strong> — запоминают, что пользователь уже принял условия использования cookie, чтобы не показывать уведомление повторно.</li>
+      </ul>
+      <h4>3. Согласие на использование cookie</h4>
+      <p>Продолжая использовать сайт и/или нажимая кнопку «Принять» в уведомлении о cookie, пользователь даёт согласие на сохранение и обработку файлов cookie в соответствии с настоящей Политикой. Если пользователь не согласен — он может отключить cookie в настройках своего браузера, однако в этом случае часть функций сайта может работать некорректно.</p>
+      <h4>4. Управление cookie</h4>
+      <p>Пользователь может в любой момент удалить сохранённые файлы cookie или запретить их сохранение через настройки браузера. Инструкции по управлению cookie обычно доступны в разделе «Настройки» или «Конфиденциальность» используемого браузера.</p>
+      <h4>5. Срок хранения</h4>
+      <p>Технические и предпочтительные cookie хранятся до 12 месяцев или до момента их удаления пользователем вручную. Аналитические и рекламные cookie хранятся в соответствии с политикой соответствующих сервисов аналитики и рекламных платформ.</p>
+      <h4>6. Изменения политики</h4>
+      <p>Оператор вправе обновлять настоящую Политику. Актуальная версия всегда доступна по ссылке в подвале сайта.</p>
+      <div class="req">Оператор: ИП Акбутаев Рустам Тимурович · ИНН 770974041537 · ОГРНИП 323774600546391</div>
+    </div>
+  </div>
+</div>
+
+<div class="cookie-banner" id="cookieBanner">
+  <p>Мы используем файлы cookie для аналитики и корректной работы сайта. </br>Подробнее — в <a href="#" onclick="openPolicy('cookies');return false;">политике cookie</a>.</p>
+  <button class="btn" id="cookieAccept">Принять</button>
+</div>
+
+</div>
+
+<script>
+  function openPolicy(key){
+    const el = document.getElementById('policy-'+key);
+    if(el) el.classList.add('open');
+  }
+
+  /* ---------- body scroll lock for modals (prevents the page and the
+     modal from fighting over the wheel/touch scroll at the same time) */
+  let __scrollLockY = 0;
+  function lockBodyScroll(){
+    __scrollLockY = window.scrollY || window.pageYOffset || 0;
+    document.body.style.position = 'fixed';
+    document.body.style.top = (-__scrollLockY) + 'px';
+    document.body.style.left = '0';
+    document.body.style.right = '0';
+    document.body.style.width = '100%';
+  }
+  function unlockBodyScroll(){
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.right = '';
+    document.body.style.width = '';
+    window.scrollTo(0, __scrollLockY);
+  }
+  /* watch every modal-overlay for open/close via class changes, so the
+     lock applies no matter which button/handler toggled it */
+  document.querySelectorAll('.modal-overlay').forEach(overlay=>{
+    const mo = new MutationObserver(()=>{
+      const anyOpen = document.querySelector('.modal-overlay.open');
+      if(anyOpen && document.body.style.position !== 'fixed'){
+        lockBodyScroll();
+      } else if(!anyOpen && document.body.style.position === 'fixed'){
+        unlockBodyScroll();
+      }
+    });
+    mo.observe(overlay, {attributes:true, attributeFilter:['class']});
+  });
+
+  /* mobile hamburger nav */
+  (function(){
+    const toggle = document.getElementById('navToggle');
+    const menu = document.getElementById('mobileNav');
+    if(!toggle || !menu) return;
+    toggle.addEventListener('click', ()=>{
+      const isOpen = menu.classList.toggle('open');
+      toggle.classList.toggle('open', isOpen);
+      toggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+    menu.querySelectorAll('a').forEach(a=>{
+      a.addEventListener('click', ()=>{
+        menu.classList.remove('open');
+        toggle.classList.remove('open');
+        toggle.setAttribute('aria-expanded','false');
+      });
+    });
+  })();
+
+  /* pre-fill the form's format select when a tier card's CTA is clicked */
+  function selectTier(name){
+    setCustomSelectValue('formatSelect', name, true);
+  }
+
+  /* ---------- custom select widgets ---------- */
+  function setCustomSelectValue(selectId, value, flash){
+    const native = document.getElementById(selectId);
+    if(!native) return;
+    const wrap = document.querySelector('.custom-select[data-select-id="'+selectId+'"]');
+    if(!wrap) return;
+    native.value = value;
+    const valueEl = wrap.querySelector('.cs-value');
+    valueEl.textContent = value;
+    valueEl.classList.remove('placeholder');
+    wrap.querySelectorAll('.cs-option').forEach(opt=>{
+      opt.classList.toggle('selected', opt.dataset.value === value);
+    });
+    if(flash){
+      wrap.classList.remove('tier-preselected');
+      void wrap.offsetWidth;
+      wrap.classList.add('tier-preselected');
+    }
+  }
+
+  document.querySelectorAll('.custom-select').forEach(wrap=>{
+    const trigger = wrap.querySelector('.cs-trigger');
+    const panel = wrap.querySelector('.cs-panel');
+    const native = wrap.querySelector('.cs-native');
+
+    function closeSelect(){
+      wrap.classList.remove('open');
+      trigger.setAttribute('aria-expanded','false');
+    }
+    function openSelect(){
+      document.querySelectorAll('.custom-select.open').forEach(other=>{
+        if(other !== wrap){ other.classList.remove('open'); }
+      });
+      wrap.classList.add('open');
+      trigger.setAttribute('aria-expanded','true');
+    }
+
+    trigger.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      wrap.classList.contains('open') ? closeSelect() : openSelect();
+    });
+
+    wrap.querySelectorAll('.cs-option').forEach(opt=>{
+      opt.addEventListener('click', ()=>{
+        setCustomSelectValue(native.id, opt.dataset.value, false);
+        closeSelect();
+      });
+    });
+
+    document.addEventListener('click', (e)=>{
+      if(!wrap.contains(e.target)) closeSelect();
+    });
+    document.addEventListener('keydown', (e)=>{
+      if(e.key === 'Escape') closeSelect();
+    });
+    trigger.addEventListener('keydown', (e)=>{
+      if(e.key === 'Enter' || e.key === ' '){
+        e.preventDefault();
+        wrap.classList.contains('open') ? closeSelect() : openSelect();
+      }
+    });
+  });
+
+  /* ---------- subtle scroll parallax for in-section background photos ---------- */
+  (function(){
+    const photos = document.querySelectorAll('.bg-photo');
+    if(!photos.length) return;
+    let ticking = false;
+    function updateParallax(){
+      const vh = window.innerHeight;
+      photos.forEach(p=>{
+        const speed = parseFloat(p.dataset.speed || '0.06');
+        const rect = p.getBoundingClientRect();
+        const center = rect.top + rect.height/2;
+        const delta = (vh/2 - center) * speed;
+        p.style.transform = `translateY(${delta}px)`;
+      });
+      ticking = false;
+    }
+    window.addEventListener('scroll', ()=>{
+      if(!ticking){
+        window.requestAnimationFrame(updateParallax);
+        ticking = true;
+      }
+    }, {passive:true});
+    window.addEventListener('resize', updateParallax);
+    updateParallax();
+  })();
+
+  /* required consent checkbox gates the submit button */
+  const consentCheckbox = document.getElementById('consentCheckbox');
+  const submitBtn = document.getElementById('submitBtn');
+  const consentHint = document.getElementById('consentHint');
+  if(consentCheckbox && submitBtn){
+    consentCheckbox.addEventListener('change', ()=>{
+      submitBtn.disabled = !consentCheckbox.checked;
+      if(consentHint) consentHint.textContent = consentCheckbox.checked ? 'Заявку читает команда лично — без спама.' : 'Отметь согласие выше, чтобы отправить заявку.';
+    });
+  }
+
+  /* cookie banner: shown 5s after load, on every 10th visit, until accepted */
+  (function(){
+    try{
+      const VISIT_KEY = 'muzhaysya_visits';
+      const ACCEPT_KEY = 'muzhaysya_cookies_accepted';
+      const visits = parseInt(localStorage.getItem(VISIT_KEY) || '0', 10) + 1;
+      localStorage.setItem(VISIT_KEY, String(visits));
+      const accepted = localStorage.getItem(ACCEPT_KEY) === '1';
+      const banner = document.getElementById('cookieBanner');
+      const acceptBtn = document.getElementById('cookieAccept');
+      if(!accepted && banner && visits % 10 === 0){
+        setTimeout(()=>{ banner.classList.add('show'); }, 5000);
+      }
+      if(acceptBtn){
+        acceptBtn.addEventListener('click', ()=>{
+          localStorage.setItem(ACCEPT_KEY, '1');
+          banner.classList.remove('show');
+        });
+      }
+    }catch(e){ /* localStorage unavailable — fail silently */ }
+  })();
+
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){ e.target.classList.add('reveal'); io.unobserve(e.target); }
+    });
+  },{threshold:.12});
+  document.querySelectorAll('.card, .hex-module, .fcard, .bonus-card, .tier, .win, .stat, .fstat').forEach(el=>io.observe(el));
+
+  /* preloader: glitching hexagon, then site slides up + fades in */
+  window.addEventListener('load', ()=>{
+    const minDelay = new Promise(res=>setTimeout(res, 1500));
+    minDelay.then(()=>{
+      document.body.classList.add('loaded');
+      const pre = document.getElementById('preloader');
+      setTimeout(()=>{ if(pre) pre.style.display='none'; }, 700);
+    });
+  });
+
+  /* subtle parallax on hero hexagon following the cursor */
+  const bigHex = document.querySelector('.hero-frame .big-hex');
+  if(bigHex){
+    document.querySelector('.hero-frame').addEventListener('mousemove', (e)=>{
+      const r = e.currentTarget.getBoundingClientRect();
+      const x = (e.clientX - r.left)/r.width - .5;
+      const y = (e.clientY - r.top)/r.height - .5;
+      bigHex.style.transform = `translateY(-50%) rotate(${x*6}deg) translate(${x*10}px, ${y*10}px)`;
+    });
+  }
+
+  /* count-up on the author stats when they enter view */
+  const counters = document.querySelectorAll('.stat .num');
+  const countIo = new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(!entry.isIntersecting) return;
+      const el = entry.target;
+      const text = el.textContent.trim();
+      const match = text.match(/^(\d+)(.*)$/);
+      if(match){
+        const target = parseInt(match[1],10);
+        const suffix = match[2];
+        let cur = 0;
+        const step = Math.max(1, Math.round(target/30));
+        const tick = ()=>{
+          cur = Math.min(target, cur+step);
+          el.textContent = cur + suffix;
+          if(cur < target) requestAnimationFrame(tick);
+        };
+        tick();
+      }
+      countIo.unobserve(el);
+    });
+  },{threshold:.6});
+  counters.forEach(c=>countIo.observe(c));
+
+  /* clicking a pain-point card marks it as selected — small delight, syncs nothing else */
+  document.querySelectorAll('#portraits .card').forEach(card=>{
+    card.addEventListener('click', ()=>{
+      const already = card.classList.contains('selected');
+      document.querySelectorAll('#portraits .card').forEach(c=>c.classList.remove('selected'));
+      if(!already) card.classList.add('selected');
+    });
+  });
+</script>
+
+</body>
+</html>
