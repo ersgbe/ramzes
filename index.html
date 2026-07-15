@@ -29,6 +29,9 @@
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth; scrollbar-color:#ff2438 #0a0a0c; scrollbar-width:thin; overflow-x:hidden; max-width:100%;}
+  @media (min-width: 861px) {
+    html { zoom: 0.9; }
+  }
   ::-webkit-scrollbar{width:10px;height:10px;}
   ::-webkit-scrollbar-track{background:#0a0a0c;}
   ::-webkit-scrollbar-thumb{background:linear-gradient(180deg,#ff2438,#8a0f1c);border-radius:0;border:1px solid #050506;}
@@ -1002,6 +1005,7 @@
   }
 </style>
 <base target="_blank">
+<base target="_blank">
 </head>
 <body>
 
@@ -1317,7 +1321,7 @@
             <li>Без проверки ДЗ и мини-группы</li>
           </ul>
         </div>
-        <a href="#form" class="tier-cta" onclick="selectTier('Самостоятельный')">Узнать на созвоне</a>
+        <a href="#form" class="tier-cta" target="_self" onclick="selectTier('Самостоятельный'); return false;">Узнать на созвоне</a>
       </div>
 
       <div class="tier">
@@ -1332,7 +1336,7 @@
             <li>Texting Ninja и VIBE AI в комплекте</li>
           </ul>
         </div>
-        <a href="#form" class="tier-cta" onclick="selectTier('Сопровождение в пятёрках')">Узнать на созвоне</a>
+        <a href="#form" class="tier-cta" target="_self" onclick="selectTier('Сопровождение в пятёрках'); return false;">Узнать на созвоне</a>
       </div>
 
       <div class="tier featured hud">
@@ -1348,7 +1352,7 @@
             <li>Сессия на проработку убеждений</li>
           </ul>
         </div>
-        <a href="#form" class="tier-cta" onclick="selectTier('Мастер-группа с Рамзесом')">Узнать на созвоне</a>
+        <a href="#form" class="tier-cta" target="_self" onclick="selectTier('Мастер-группа с Рамзесом'); return false;">Узнать на созвоне</a>
       </div>
 
       <div class="tier">
@@ -1363,7 +1367,7 @@
             <li>Безлимитная обратная связь весь месяц</li>
           </ul>
         </div>
-        <a href="#form" class="tier-cta" onclick="selectTier('Буткемп в Москве')">Узнать на созвоне</a>
+        <a href="#form" class="tier-cta" target="_self" onclick="selectTier('Буткемп в Москве'); return false;">Узнать на созвоне</a>
       </div>
 
       <div class="tier">
@@ -1378,7 +1382,7 @@
             <li>Безлимитная поддержка 6 недель</li>
           </ul>
         </div>
-        <a href="#form" class="tier-cta" onclick="selectTier('Индива 1-на-1')">Узнать на созвоне</a>
+        <a href="#form" class="tier-cta" target="_self" onclick="selectTier('Индива 1-на-1'); return false;">Узнать на созвоне</a>
       </div>
     </div>
 
